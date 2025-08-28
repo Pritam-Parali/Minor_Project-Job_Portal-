@@ -1,8 +1,4 @@
-@import "tailwindcss";
-
-
-
-/* body{
+body{
     margin: 0px;
     padding: 0px;
 }
@@ -23,4 +19,4 @@
 .navbar nav ul li .nav:hover{
     background-color: #fff;
     color: red;
-} */
+}
