@@ -15,7 +15,7 @@ const Navbar =()=>{
 
   
   <div>
-    <ul className="flex items-center gap-10 text-white px-5">
+    <ul className="flex items-center gap-10 text-white px-[20px]">
       <li><NavLink to={'/Home'}>Home</NavLink></li>
       <li>About</li>
       <li>Contact</li>
@@ -23,8 +23,8 @@ const Navbar =()=>{
   </div>
 
   <div className="flex items-center gap-10">
-    <button className="bg-white px-3 py-1.5 rounded-md">Signup</button>
-    <button className="bg-white px-3 py-1.5 rounded-md">Signin</button>
+    <button className="bg-white px-3 py-1 rounded-md">Signup</button>
+    <button className="bg-white px-3 py-1 rounded-md">Signin</button>
   </div>
 
 </div>
