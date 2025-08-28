@@ -11,14 +11,13 @@ const About = () =>{
                      <div className="Heading">About Us</div>
                      <br></br>
 
-            <div className="paragraph-1"><span>Welcome to JobNest – a platform created by a passionate team of 5 members with the goal of bridging the gap between students, graduates, and career opportunities.
-
-Our mission is simple:
-
-* To help students and job seekers connect with the right opportunities.
-* To provide recruiters with an easy and efficient way to discover talented candidates.</span></div>
+            <div className="para_1">
+            Welcome to JobNest – a platform created by a passionate team of 5 members with the goal of bridging the gap between students, graduates, and career opportunities.   
+            Our mission is simple:
+            * To help students and job seekers connect with the right opportunities.
+            * To provide recruiters with an easy and efficient way to discover talented candidates.</div>
 <br></br>
-<div className="paragraph-2">
+<div className="para_2">
 
 This portal is designed with a user-friendly interface where:
 
