@@ -30,7 +30,6 @@ This portal is designed with a user-friendly interface where:
 We believe in empowering individuals by providing them with the right opportunities at the right time. Our vision is to make job hunting stress-free, transparent, and accessible for everyone in our college community and beyond.
 
 Together, we aim to build a platform that grows with you and supports you in every step of your career journey.
-
                 </div>
             </div>
         </>
