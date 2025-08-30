@@ -6,6 +6,7 @@ const Job = () =>{
         <>
             <Navbar/>
             <h1>This is Job Posting Section</h1>
+            <h1>This is Job Posting Section</h1>
         </>
     )
 }
