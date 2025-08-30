@@ -8,10 +8,6 @@ const Login = () => {
     <div>
 
         This is login page
-        This is login page
-        This is login page
-        This is login page
-
     </div>
   
   </>
