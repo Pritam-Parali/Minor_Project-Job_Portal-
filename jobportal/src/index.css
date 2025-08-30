@@ -1,22 +1,107 @@
-body{
-    margin: 0px;
-    padding: 0px;
+body {
+  margin: 0;
+  padding: 0;
+  /* font-size: 15px; */
 }
-.navbar{
-    height: 60px;
-    background-color: red;
-    padding-top: 5px;
+
+.navbar {
+  height: 60px;
+  background-color: blue;
+  padding-top: 5px;
 }
-.navbar nav ul li{
-    display: inline-block;
+
+.navbar nav ul {
+  display: flex;          
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  margin-top: 10px;
+  margin-left: 100px;
+  padding: 0;
 }
-.navbar nav ul li .nav{
-    color: #fff;
-    text-decoration: none;
-    margin-left: 20px;
-    padding: 3px 7px;
+
+.navbar nav ul li {
+  margin: 0 10px;
 }
-.navbar nav ul li .nav:hover{
-    background-color: #fff;
-    color: red;
+
+.navbar nav ul li .nav {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  padding: 3px 7px;
+  font-weight: bolder;
+  margin-right: 20px;
+}
+.navbar nav ul li .myprofile{
+  color:white;
+  text-decoration: none;
+  
+}
+
+
+.navbar nav ul li .nav:hover {
+  background-color: #fff;
+  color: red;
+}
+
+.navbar ul .search-box {
+  margin-left: 100px;   
+  margin-right: 110px;
+  display: flex;
+  align-items: center;
+}
+
+.search-box input {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+.logo{
+    height :20px;
+    width:20px;
+    padding-left:5px;
+    cursor: pointer;
+
+}
+
+.jobnest-logo {
+  height: 40px;
+  width: auto;
+  cursor: pointer;
+  border-radius: 50px;
+  margin-left: -50px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.logo-link {
+  display: flex;
+  align-items: center;
+  
+}
+
+.myprofile{
+  margin-left: -85px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+}
+.navbar nav ul li .myprofile:hover {
+  background-color: whitesmoke;
+  color: blue;
+}
+
+.navbar nav ul li .myprofile {
+  color: #fff;
+  text-decoration: none;
+  font-weight: normal;
+  margin-right: 20px;
+}
+.login{
+  color:white;
+  font-size: small;
+  margin:auto;
+  text-decoration: none;
+}
+.navbar nav ul li .login:hover {
+  background-color: whitesmoke;
+  color: blue;
 }
