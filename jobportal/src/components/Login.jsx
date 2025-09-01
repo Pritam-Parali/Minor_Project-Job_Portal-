@@ -4,7 +4,7 @@ import Navbar from './navbar';
 const Login = () => {
   return (
   <>
-  
+    <Navbar/>
     <div>
 
         This is login page
