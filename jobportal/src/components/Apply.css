@@ -1,72 +1,126 @@
-/* General Container */
+/* === Subtle Background === */
 .apply-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(to right, #6a11cb, #2575fc);
+  background: linear-gradient(to bottom right, #e0e7ec, #f9fafb);
+  background-size: cover;
   padding: 20px;
 }
 
-/* Form Box */
+/* === Smooth Fade-In Animation === */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* === Glassmorphic Form === */
 .apply-form {
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
   width: 100%;
   max-width: 400px;
   text-align: center;
+  animation: fadeInUp 0.8s ease forwards;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
 
-/* Heading */
+/* === Heading === */
 .apply-form h2 {
   margin-bottom: 20px;
-  color: #333;
   font-size: 1.8rem;
   font-weight: 600;
+  color: #333;
+  letter-spacing: 0.5px;
 }
 
-/* Input Fields */
+/* === Input & Select Fields === */
 .apply-form input,
 .apply-form select {
   width: 100%;
   padding: 12px;
   margin-bottom: 15px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.7);
   font-size: 1rem;
   outline: none;
+  color: #333;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.apply-form input::placeholder {
+  color: #666;
+  font-size: 0.95rem;
+}
+
+.apply-form select {
+  color: #444;
+}
+
+/* === Input Focus Effect === */
+.apply-form input:focus,
+.apply-form select:focus {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+  transform: scale(1.02);
+}
+
+/* === File Upload Field === */
+.apply-form input[type="file"] {
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+}
+
+.apply-form input[type="file"]::-webkit-file-upload-button {
+  background: #007bff;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
   transition: 0.3s ease;
 }
 
-/* Input Focus */
-.apply-form input:focus,
-.apply-form select:focus {
-  border-color: #2575fc;
-  box-shadow: 0 0 6px rgba(37, 117, 252, 0.5);
+.apply-form input[type="file"]::-webkit-file-upload-button:hover {
+  background: #0056b3;
 }
 
-/* Submit Button */
+/* === Submit Button === */
 .apply-form button {
   width: 100%;
   padding: 12px;
-  background: #2575fc;
-  color: #fff;
+  background: #007bff;
+  color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0, 123, 255, 0.2);
 }
 
-/* Hover Effect for Button */
 .apply-form button:hover {
-  background: #6a11cb;
+  background: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 12px rgba(0, 123, 255, 0.3);
 }
 
-/* Responsive */
+/* === Responsive Design === */
 @media (max-width: 480px) {
   .apply-form {
     padding: 20px;

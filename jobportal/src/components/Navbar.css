@@ -1,0 +1,40 @@
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Login & Profile Buttons */
+.login,
+.myprofile {
+  text-decoration: none;
+  padding: 8px 16px;
+  background: #007bff;
+  color: white;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.login:hover,
+.myprofile:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Logout Button */
+.logout-btn {
+  background: #ff4d4d;
+  color: white;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+  background: #cc0000;
+}

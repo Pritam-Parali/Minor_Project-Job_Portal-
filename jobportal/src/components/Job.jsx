@@ -5,14 +5,14 @@ import Navbar from "./Navbar";
 const Job = () => {
   const navigate = useNavigate();
 
-  // Sample Job Data
+
   const jobs = [
     { id: 1, title: "Frontend Developer", company: "TechCorp", location: "Bangalore", salary: "₹8 LPA" },
     { id: 2, title: "Backend Developer", company: "CodeSolutions", location: "Hyderabad", salary: "₹10 LPA" },
     { id: 3, title: "Full Stack Developer", company: "DevStudio", location: "Remote", salary: "₹12 LPA" },
   ];
 
-  // Handle Apply Button Click
+
   const handleApply = (jobId) => {
     navigate(`/apply/${jobId}`); 
   };

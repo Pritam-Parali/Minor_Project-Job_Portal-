@@ -8,6 +8,7 @@ import Apply from "./components/Apply";
 import Contactus from './components/Contactus'
 import Myprofile from './components/Myprofile';
 import Login from './components/Login';
+import Register from './components/Register';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path='/Contactus' element={<Contactus/>}></Route>
           <Route path='/Myprofile' element={<Myprofile/>}></Route>
           <Route path='/Login' element={<Login/>}></Route>
+          <Route path='/Register' element={<Register/>}></Route>
         </Routes>
       </Router>
       
