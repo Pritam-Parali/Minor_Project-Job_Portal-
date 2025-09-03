@@ -14,7 +14,7 @@ const Job = () => {
 
   // Handle Apply Button Click
   const handleApply = (jobId) => {
-    navigate(`/apply/${jobId}`); // Redirect to Apply.jsx with jobId as a param
+    navigate(`/apply/${jobId}`); 
   };
 
   return (
