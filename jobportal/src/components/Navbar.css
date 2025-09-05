@@ -1,7 +1,90 @@
-.auth-buttons {
-  display: flex;
-  align-items: center;
-  gap: 15px;
+
+/* Navbar Container */
+.navbar {
+  background: blue;
+  padding: 8px 20px;
+  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  position: relative;
+}
+
+/* Full Navbar Hover Effect Line */
+.navbar::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: #f1c40f;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.4s ease-out;
+}
+
+.navbar:hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Jobnest Logo */
+.jobnest-logo {
+  height: 100px;
+  width: 100px;
+  transition: all .3s ease;
+  filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.4));
+}
+
+.jobnest-logo:hover {
+  transform: scale(1.5) rotate(3deg);
+  filter: drop-shadow(0px 0px 12px #00f7ff);
+}
+
+/* Navbar Links */
+.nav {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  color: white;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
+  position: relative;
+  overflow: hidden;
+  line-height: 1.5;
+  display: inline-block;
+}
+
+/* Individual Link Underline Effect */
+.nav::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #f1c40f;
+  transform: scaleX(0);
+  transform-origin: bottom left;
+  transition: transform 0.3s ease-out;
+  
+}
+
+.nav:hover::after {
+  
+  transform: scaleX(1);
+}
+
+/* Navbar Links Hover Effects (background & shadow) */
+.nav:hover {
+  
+  background: #0056b3;
+  border-radius: 6px;
+  transform: scale(1.05);
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+  text-shadow: 0px 0px 8px #f1c40f, 0px 0px 12px #fff;
 }
 
 /* Login & Profile Buttons */
@@ -14,27 +97,32 @@
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Only transition the properties we need */
+  text-shadow: 0px 0px 8px rgba(0,0,0,0.6);
+  display: inline-block; /* Crucial for transform to work correctly on these elements */
 }
 
+/* New Hover Effect for Buttons (Lifts and Scales) */
+/* Hover Effect for Buttons */
 .login:hover,
 .myprofile:hover {
+  transform: scale(1.3); /* Makes the button 10% bigger on hover */
   background: #0056b3;
-  transform: translateY(-2px);
+  box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+  text-shadow: 0px 0px 10px #00ffea;
 }
 
-/* Logout Button */
-.logout-btn {
-  background: #ff4d4d;
-  color: white;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 8px;
-  font-size: 0.9rem;
-  cursor: pointer;
+/* Search Box */
+.search-box input {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  outline: none;
   transition: all 0.3s ease;
 }
 
-.logout-btn:hover {
-  background: #cc0000;
+.search-box input:focus {
+  border-color: #007bff;
+  box-shadow: 0px 0px 8px #007bff;
+  transform: translateY(-5px) scale(1.05);
 }
