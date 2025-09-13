@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
+import Navbar from "./Navbar";
+
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -13,7 +15,8 @@ const Login = () => {
     alert(`Welcome, ${formData.username}!`);
   };
 
-  return (
+  return (<>
+      <Navbar />
     <div className="login-page">
       <div className="login-container">
         <h2>Login</h2>
@@ -61,6 +64,7 @@ const Login = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 

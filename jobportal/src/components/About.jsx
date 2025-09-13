@@ -1,38 +1,55 @@
 import React from "react";
 import Navbar from "./Navbar";
-import './About.css';
+import "./About.css";
+import together from "../assets/together.jpeg";
+const About = () => {
+  return (
+    <>
+      <Navbar />
+      <section className="section1">
+        <div className="Heading1">
+          <h1 className="upperpart">
+            About<span className="span">Jobportal</span>
+          </h1>
+          <p className="lowerpart">
+            Empowering careers and connecting talent with opportunity since 2025{" "}
+          </p>
+        </div>
+      </section>
 
-const About = () =>{
-    return (
-        <>
-            <Navbar/>
-            <div>
-            
-                     <div className="Heading">About Us</div>
-                     <br></br>
+      <section className="section2">
+        <div className="outerdiv">
+          <div className="inner_left">
+            <h3 className="heading3">Our Story</h3>
+            <p className="para">
+              JobNest was born from a simple yet powerful idea: to revolutionize
+              how people find jobs and how companies discover talent. Founded in
+              2025 by a team of 5 tech enthusiasts, we recognized the gap
+              between traditional job searching methods and the modern digital
+              world.
+              <br />
+              <br />
+              Our platform combines cutting-edge technology with human insight
+              to create meaningful connections between job seekers and
+              employers. We believe that the right opportunity can transform
+              lives, and the right talent can transform businesses.
+              <br />
+              <br />
+              Today, we're proud to serve over 45,000 job seekers and 850+
+              partner companies worldwide, with a success rate that speaks to
+              our commitment to quality matches and lasting career
+              relationships.
+            </p>
+          </div>
+        <div className="inner_right">
+            <img src={together} alt="image" className="image"></img>
+        </div>
+        </div>
+      </section>
 
-            <div className="para_1">
-            Welcome to JobNest – a platform created by a passionate team of 5 members with the goal of bridging the gap between students, graduates, and career opportunities.   
-            Our mission is simple:
-            * To help students and job seekers connect with the right opportunities.
-            * To provide recruiters with an easy and efficient way to discover talented candidates.</div>
-<br></br>
-<div className="para_2">
 
-This portal is designed with a user-friendly interface where:
 
-1)Job seekers can create profiles, upload resumes, and apply to relevant openings.
-
-2)Employers can post job listings, filter applicants, and find the best talent.
-
-3)Students & freshers get a dedicated space to explore internships, part-time jobs, and entry-level roles.
-
-We believe in empowering individuals by providing them with the right opportunities at the right time. Our vision is to make job hunting stress-free, transparent, and accessible for everyone in our college community and beyond.
-
-Together, we aim to build a platform that grows with you and supports you in every step of your career journey.
-                </div>
-            </div>
-        </>
-    )
-}
+    </>
+  );
+};
 export default About;

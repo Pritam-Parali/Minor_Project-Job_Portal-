@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./Register.css";
-
+import Navbar from "./Navbar";
 const Register = () => {
   const [formData, setFormData] = useState({
     username: "",
@@ -24,6 +24,8 @@ const Register = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="register-page">
       <div className="register-container">
         <h2>Create Account</h2>
@@ -104,6 +106,7 @@ const Register = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 export default Register;
