@@ -1,9 +1,10 @@
 body {
   margin: 0;
   padding: 0;
-  /* font-size: 15px; */
+  font-family: Arial, sans-serif;
 }
 
+/* ---------------- Navbar ---------------- */
 .navbar {
   height: 60px;
   background-color: blue;
@@ -11,7 +12,7 @@ body {
 }
 
 .navbar nav ul {
-  display: flex;          
+  display: flex;
   align-items: center;
   list-style: none;
   margin: 0;
@@ -32,12 +33,11 @@ body {
   font-weight: bolder;
   margin-right: 20px;
 }
-.navbar nav ul li .myprofile{
-  color:white;
-  text-decoration: none;
-  
-}
 
+.navbar nav ul li .myprofile {
+  color: white;
+  text-decoration: none;
+}
 
 .navbar nav ul li .nav:hover {
   background-color: #fff;
@@ -45,7 +45,7 @@ body {
 }
 
 .navbar ul .search-box {
-  margin-left: 100px;   
+  margin-left: 100px;
   margin-right: 110px;
   display: flex;
   align-items: center;
@@ -56,12 +56,12 @@ body {
   border: 1px solid #ccc;
   border-radius: 10px;
 }
-.logo{
-    height :20px;
-    width:20px;
-    padding-left:5px;
-    cursor: pointer;
 
+.logo {
+  height: 20px;
+  width: 20px;
+  padding-left: 5px;
+  cursor: pointer;
 }
 
 .jobnest-logo {
@@ -76,32 +76,107 @@ body {
 .logo-link {
   display: flex;
   align-items: center;
-  
 }
 
-.myprofile{
+.myprofile {
   margin-left: -85px;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
 }
+
 .navbar nav ul li .myprofile:hover {
   background-color: whitesmoke;
   color: blue;
 }
 
-.navbar nav ul li .myprofile {
-  color: #fff;
-  text-decoration: none;
-  font-weight: normal;
-  margin-right: 20px;
-}
-.login{
-  color:white;
+.navbar nav ul li .login {
+  color: white;
   font-size: small;
-  margin:auto;
+  margin: auto;
   text-decoration: none;
 }
+
 .navbar nav ul li .login:hover {
   background-color: whitesmoke;
   color: blue;
+}
+
+/* ------------ HERO BACKGROUND SECTION ------------ */
+.hero-bg {
+  position: relative;
+  width: 100%;
+  height: 70vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  padding: 30px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.hero-overlay h1 {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.hero-overlay p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+
+/* ------------ COMPANY SLIDER ------------ */
+.company-slider {
+  padding: 50px 20px;
+  background: #f8f9fa;
+  text-align: center;
+  overflow: hidden;
+}
+
+.company-slider h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Scroll Track */
+.logo-track {
+  display: flex;
+  animation: scroll 15s linear infinite;
+  width: max-content;
+}
+
+.logo-slide {
+  min-width: 150px;
+  margin: 0 30px;
+  text-align: center;
+}
+
+.logo-slide img {
+  height: 80px;
+  width: auto;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.logo-slide p {
+  font-size: 1rem;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Infinite Scroll Animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
