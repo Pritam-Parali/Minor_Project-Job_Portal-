@@ -2,7 +2,7 @@
 /* Navbar Container */
 .navbar {
   background: blue;
-  width: 100%;
+  width:absolute;
   margin-right: 0px;
   padding: 8px;
   box-shadow: 0px 4px 15px rgba(0,0,0,0.2);

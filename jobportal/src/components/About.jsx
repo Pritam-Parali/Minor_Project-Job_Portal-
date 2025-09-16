@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "./Navbar";
 import "./About.css";
 import together from "../assets/together.jpeg";
+
 const About = () => {
   return (
     <>
@@ -41,14 +42,70 @@ const About = () => {
               relationships.
             </p>
           </div>
-        <div className="inner_right">
+          <div className="inner_right">
             <img src={together} alt="image" className="image"></img>
-        </div>
+          </div>
         </div>
       </section>
 
+      <section className="section3">
+        <h1 className="heading1">Our Values</h1>
+        <p className="paragraph1">The principles that guide everything we do</p>
+        <div className="outerdiv1">
+          <div className="innerdiv1">
+            <div className="innerinnerdiv">
+              <i class="fas fa-bullseye"></i>
+            </div>
+
+            <div className="textpart">
+              <h3 className="textpart_heading">Our Mission</h3><br/>
+              <p className="textpart_paragraph">To connect talented individuals with their dream careers while helping companies find the perfect candidates.</p>
+            </div>
+          </div>
 
 
+
+
+          <div className="innerdiv1">
+            <div className="innerinnerdiv">
+              <i class="fas fa-users"></i>
+            </div>
+
+            <div className="textpart">
+              <h3 className="textpart_heading">Our Mission</h3><br/>
+              <p className="textpart_paragraph">To connect talented individuals with their dream careers while helping companies find the perfect candidates.</p>
+            </div>
+          </div>
+
+
+
+
+
+          <div className="innerdiv1">
+            <div className="innerinnerdiv">
+              <i class="fas fa-medal"></i>
+            </div>
+
+            <div className="textpart">
+              <h3 className="textpart_heading">Our Mission</h3><br/>
+              <p className="textpart_paragraph">To connect talented individuals with their dream careers while helping companies find the perfect candidates.</p>
+            </div>
+          </div>
+
+
+
+          <div className="innerdiv1">
+            <div className="innerinnerdiv">
+              <i class="fas fa-globe"></i>
+            </div>
+
+            <div className="textpart">
+              <h3 className="textpart_heading">Our Mission</h3><br/>
+              <p className="textpart_paragraph">To connect talented individuals with their dream careers while helping companies find the perfect candidates.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
   );
 };
