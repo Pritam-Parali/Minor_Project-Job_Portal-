@@ -106,6 +106,15 @@ const About = () => {
           </div>
         </div>
       </section>
+
+      <section className="section_4">
+          <h3 className="heading_4">Meet Our Team</h3>
+          <p className="paragraph_4">The passionate people behind JobPortal</p>
+
+
+      </section>
+
+
     </>
   );
 };

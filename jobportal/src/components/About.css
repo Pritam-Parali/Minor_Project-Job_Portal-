@@ -85,6 +85,7 @@
 .section3{
     background-color: rgb(249, 249, 249);
     padding-top: 40px;
+    padding-bottom: 70px;
 }
 
 .section3 .heading1 {
@@ -159,5 +160,21 @@ margin-left: 10px;
 
 .section3 .outerdiv1 .innerdiv1  .textpart .textpart_heading {
         font-size: 30px;
+}
+
+/* Section 4 */
+
+.section_4 .heading_4{
+    padding-top:40px ;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bolder;
+}
+
+.section_4 .paragraph_4{
+    text-align: center;
+    padding-top: 10px;
+    font-size: 20px;
+    margin-bottom: 70px;
 }
 
