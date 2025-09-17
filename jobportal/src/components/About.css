@@ -178,3 +178,30 @@ margin-left: 10px;
     margin-bottom: 70px;
 }
 
+.section_4 .div4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.section_4 .div4 .innerdiv4{
+    height: absolute;
+    width:30%;
+    
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.section_4 .div4 .innerdiv4 img{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    
+}
+.section_4 .div4 .innerdiv4 .h3{
+    padding-top: 20px;
+}
