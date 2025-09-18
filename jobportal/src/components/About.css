@@ -205,3 +205,39 @@ margin-left: 10px;
 .section_4 .div4 .innerdiv4 .h3{
     padding-top: 20px;
 }
+
+.section5{
+    margin-top: 150px;
+    background-color: rgb(241, 239, 239);
+    border-radius: 60%;
+}
+
+.section5 .outerdiv5{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.section5 .outerdiv5 h2{
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 50px;
+    text-decoration: underline dotted blue;
+    padding-top: 30px;
+}
+
+
+.section5 .outerdiv5 .innerdiv5 img{
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+}
+
+.section5 .outerdiv5 h3{
+    font-weight: bolder;
+    text-align: center;
+    margin-bottom: 50px;
+    padding-top: 10px;
+
+}

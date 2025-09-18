@@ -7,6 +7,8 @@ import sayan from "../assets/personal_image/sayan.jpg";
 import arpita from "../assets/personal_image/arpita.jpg";
 import pritam from "../assets/personal_image/pritam.jpg";
 import ali from "../assets/personal_image/ali_sir.jpg";
+import supriya from "../assets/personal_image/supriya.jpg";
+
 
 const About = () => {
   return (
@@ -145,12 +147,26 @@ const About = () => {
             <h3 className="h3">ARPITA ROY</h3>
           </div>
           <div className="innerdiv4">
-            <img src={sayan} alt="SUPRIYA"></img>
+            <img src={supriya} alt="SUPRIYA"></img>
             <h3 className="h3">SUPRIYA MATTABAR</h3>
           </div>
+ 
         </div>
         
       </section>
+
+      <section className="section5">
+        <div className="outerdiv5">
+        <h2>Special thanks to our Mentor</h2>
+          <div className="innerdiv5">
+            <img src={ali} alt="ALI SIR"></img>
+            <h3>Asraf Ali </h3>
+          </div>
+        </div>
+      </section>
+
+
+
     </>
   );
 };
