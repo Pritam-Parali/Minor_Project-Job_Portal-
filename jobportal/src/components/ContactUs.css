@@ -1,0 +1,264 @@
+/* Outer wrapper */
+.page-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  background: #f4f7fa;
+}
+
+/* Contact card */
+.contact-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 35px;
+  border-radius: 12px;
+  background: #ffffff;
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Title + Subtitle */
+.contact-title {
+  text-align: center;
+  font-size: 26px;
+  color: #222;
+  margin-bottom: 6px;
+}
+
+.contact-subtitle {
+  text-align: center;
+  font-size: 15px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.contact-form label {
+  margin-bottom: 16px;
+  font-weight: 600;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Input + textarea */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  outline: none;
+  background: #fafafa;
+  transition: 0.2s ease;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: #007bff;
+  background: #fff;
+  box-shadow: 0px 0px 5px rgba(0, 123, 255, 0.3);
+}
+
+.contact-form textarea {
+  min-height: 100px;
+  resize: none;
+}
+
+/* Button */
+.contact-form button {
+  margin-top: 14px;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: #007bff;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.contact-form button:hover {
+  background: #0056b3;
+  transform: translateY(-2px);
+}
+
+/* Errors */
+.error {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+}
+
+/* Success */
+.success {
+  margin-top: 12px;
+  color: green;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Contact details */
+.contact-details {
+  margin-top: 25px;
+  padding-top: 15px;
+  border-top: 1px solid #e5e7eb;
+  font-size: 14px;
+  color: #444;
+  text-align: center;
+}
+
+.contact-details h3 {
+  margin-bottom: 10px;
+  font-size: 18px;
+  color: #222;
+}
+
+/* FAQ Section */
+.faq-section {
+  margin-top: 50px;
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
+.faq-title {
+  font-size: 24px;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+/* Two-column grid */
+.faq-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.faq-item {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+  text-align: left;
+}
+
+.faq-item h4 {
+  margin-bottom: 8px;
+  font-size: 16px;
+  color: #007bff;
+}
+
+.faq-item p {
+  font-size: 14px;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Chat Section */
+.chat-section {
+  margin-top: 40px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.chat-box {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background: #fff;
+  padding: 15px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.chat-messages {
+  height: 220px;
+  overflow-y: auto;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #f9f9f9;
+  border-radius: 6px;
+}
+
+.chat-msg {
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 18px;
+  max-width: 80%;
+}
+
+.chat-msg.user {
+  background: #007bff;
+  color: #fff;
+  margin-left: auto;
+  text-align: right;
+}
+
+.chat-msg.bot {
+  background: #eaeaea;
+  color: #333;
+  margin-right: auto;
+  text-align: left;
+}
+
+/* Chat Options as Chips */
+.chat-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  justify-content: flex-start;
+}
+
+.chat-options button {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.chat-options button:hover {
+  background: #0056b3;
+  transform: scale(1.05);
+}
+
+/* Chat Input */
+.chat-input {
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 18px;
+  border: 1px solid #ccc;
+}
+
+.chat-input button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 18px;
+  background: #007bff;
+  color: #fff;
+  cursor: pointer;
+}
