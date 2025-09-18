@@ -200,8 +200,14 @@ margin-left: 10px;
     height: 300px;
     width: 300px;
     border-radius: 50%;
-    
 }
+
+.section_4 .div4 .innerdiv4 .pritamphoto{
+    height: 300px;
+    width:340px;
+    border-radius: 50%;
+}
+
 .section_4 .div4 .innerdiv4 .h3{
     padding-top: 20px;
 }

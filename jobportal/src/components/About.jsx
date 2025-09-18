@@ -130,7 +130,7 @@ const About = () => {
           </div>
 
           <div className="innerdiv4">
-            <img src={pritam} alt="pritam"></img>
+            <img src={pritam} alt="pritam" className="pritamphoto"></img>
             <h3 className="h3">PRITAM PARALI</h3>
           </div>
 
@@ -160,7 +160,7 @@ const About = () => {
         <h2>Special thanks to our Mentor</h2>
           <div className="innerdiv5">
             <img src={ali} alt="ALI SIR"></img>
-            <h3>Asraf Ali </h3>
+            <h3>Ashraf Ali </h3>
           </div>
         </div>
       </section>
