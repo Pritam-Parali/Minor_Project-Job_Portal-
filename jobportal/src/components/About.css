@@ -238,6 +238,7 @@ margin-left: 10px;
     height: 300px;
     width: 300px;
     border-radius: 50%;
+    
 }
 
 .section5 .outerdiv5 h3{
@@ -246,4 +247,28 @@ margin-left: 10px;
     margin-bottom: 50px;
     padding-top: 10px;
 
+}
+
+
+.footer{
+    height:200px;
+    width:100%;
+    background-color: #2563eb;
+}
+
+.footer .outerdiv{
+    padding-top: 60px;
+    display:flex;
+    justify-content: space-around ;
+    align-items:center;
+}
+
+.footer .outerdiv .innerdiv h2 {
+        color: white;
+        font-size: 45px;
+}
+
+.footer .outerdiv .innerdiv p{
+    color: rgb(209, 205, 205);
+    font-size: 20px;
 }

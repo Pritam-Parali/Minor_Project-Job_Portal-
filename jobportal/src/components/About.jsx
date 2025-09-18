@@ -164,7 +164,28 @@ const About = () => {
           </div>
         </div>
       </section>
+<footer className="footer">
 
+      <div className="outerdiv">
+        <div className="innerdiv">
+          <h2>1+ </h2>
+          <p>Years of experience</p>
+        </div>
+        <div className="innerdiv">
+          <h2>45k+ </h2>
+          <p>Active Users</p>
+        </div>
+        <div className="innerdiv">
+          <h2>850+ </h2>
+          <p>Partner Companies</p>
+        </div>
+        <div className="innerdiv">
+          <h2>94% </h2>
+          <p>Success Rate</p>
+        </div>
+      </div>
+
+</footer>
 
 
     </>
