@@ -125,7 +125,7 @@ function ContactUs() {
   };
 
   return (<>
-    <Navbar/>
+    {/* <Navbar/> */}
     <div className="page-container">
       <div className="contact-container">
         <h2 className="contact-title">📩 Contact Us</h2>

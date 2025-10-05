@@ -1,10 +1,10 @@
-import React from 'react'
-import Navbar from './navbar'
+import React from 'react';
+import Navbar from './navbar';
 
 const Myprofile = () => {
   return (
     <>
-    <Navbar/>
+    {/* <Navbar/> */}
         <div>
       This is my profile details part
     </div>

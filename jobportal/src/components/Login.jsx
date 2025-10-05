@@ -16,7 +16,7 @@ const Login = () => {
   };
 
   return (<>
-      <Navbar />
+      {/* <Navbar /> */}
     <div className="login-page">
       <div className="login-container">
         <h2>Login</h2>

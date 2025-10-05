@@ -13,7 +13,7 @@ import supriya from "../assets/personal_image/supriya.jpg";
 const About = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="section1">
         <div className="Heading1">
           <h1 className="upperpart">
