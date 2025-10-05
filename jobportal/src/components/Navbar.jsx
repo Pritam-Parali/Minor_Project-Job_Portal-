@@ -23,7 +23,8 @@ const Navbar = () => {
             
             <li className="search-box">
               <input type="text" placeholder="search" />
-              <img src={search} alt="Search" className="logo" />
+              <button className="search-button">🔍</button>
+              {/* <img src={search} alt="Search" className="logo" /> */}
             </li>
             <li><NavLink to="/Myprofile" className={"myprofile"}>Profile</NavLink></li>
             <li><NavLink to="/Login" className={"login"}>Login</NavLink></li> 
