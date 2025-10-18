@@ -17,7 +17,7 @@ const About = () => {
       <section className="section1">
         <div className="Heading1">
           <h1 className="upperpart">
-            About<span className="span">Jobportal</span>
+            About<span className="span">JobNest</span>
           </h1>
           <p className="lowerpart">
             Empowering careers and connecting talent with opportunity since 2025{" "}
