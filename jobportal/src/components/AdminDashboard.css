@@ -1,0 +1,59 @@
+.admin-dashboard {
+  padding: 40px;
+  background: linear-gradient(135deg, #2c3e50, #3498db);
+  min-height: 100vh;
+  color: white;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}
+
+.admin-dashboard header {
+  margin-bottom: 40px;
+}
+
+.admin-dashboard header button {
+  background: #ff4757;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.admin-dashboard header button:hover {
+  background: #e84118;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 15px;
+  padding: 25px;
+  width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-8px);
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.card h3 {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.card p {
+  font-size: 22px;
+  font-weight: bold;
+}

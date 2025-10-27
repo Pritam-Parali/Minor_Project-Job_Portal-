@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import "./Login.css";
-import Navbar from "./Navbar";
-
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -12,11 +12,40 @@ const Login = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(`Welcome, ${formData.username}!`);
+
+    const allUsers = JSON.parse(localStorage.getItem("RegisteredUsers")) || [];
+    const foundUser = allUsers.find(
+      (u) =>
+        u.username === formData.username && u.password === formData.password
+    );
+
+    if (!foundUser) {
+      alert("Invalid username or password!");
+      return;
+    }
+
+    // Generate and verify OTP
+    const otp = Math.floor(100000 + Math.random() * 900000);
+    alert("Your OTP is: " + otp);
+    const enteredOtp = prompt("Enter OTP:");
+
+    if (String(otp) === enteredOtp) {
+      alert("Login Successful!");
+      localStorage.setItem("LoggedIn", "true");
+      localStorage.setItem("setusername", foundUser.username);
+      localStorage.setItem("userType", foundUser.userType);
+
+      if (foundUser.userType === "Admin") {
+        navigate("/admin-dashboard");
+      } else {
+        navigate("/index");
+      }
+    } else {
+      alert("Invalid OTP. Try again.");
+    }
   };
 
-  return (<>
-      {/* <Navbar /> */}
+  return (
     <div className="login-page">
       <div className="login-container">
         <h2>Login</h2>
@@ -45,18 +74,7 @@ const Login = () => {
             <span className="icon">🔒</span>
           </div>
 
-          <div className="options">
-            <label>
-              <input type="checkbox" /> Remember Me
-            </label>
-            <a href="/forgot-password" className="forgot-link">
-              Forgot Password?
-            </a>
-          </div>
-
-          <button type="submit" className="login-btn">
-            Login
-          </button>
+          <button type="submit" className="login-btn">Login</button>
         </form>
 
         <p className="register-text">
@@ -64,7 +82,6 @@ const Login = () => {
         </p>
       </div>
     </div>
-    </>
   );
 };
 

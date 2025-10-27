@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Register.css";
-import Navbar from "./Navbar";
+
 const Register = () => {
   const [formData, setFormData] = useState({
+    userType: "User",
     username: "",
     email: "",
     phone: "",
@@ -16,20 +17,34 @@ const Register = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (formData.password !== formData.confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-    alert(`Welcome, ${formData.username}! Registration successful.`);
+
+    // Save user data in localStorage
+    localStorage.setItem("userType", formData.userType);
+    localStorage.setItem("setusername", formData.username);
+    localStorage.setItem("LoggedIn", "true");
+
+    alert(`Welcome ${formData.userType}, ${formData.username}! Registration successful.`);
+    window.location.href = formData.userType === "Admin" ? "/admin-dashboard" : "/myprofile";
   };
 
   return (
-    <>
-    {/* <Navbar/> */}
     <div className="register-page">
       <div className="register-container">
         <h2>Create Account</h2>
         <form onSubmit={handleSubmit}>
+          {/* User Type Dropdown */}
+          <div className="input-group">
+            <select name="userType" value={formData.userType} onChange={handleChange} required>
+              <option value="User">👤 User</option>
+              <option value="Admin">👑 Admin</option>
+            </select>
+          </div>
+
           {/* Username */}
           <div className="input-group">
             <input
@@ -95,18 +110,15 @@ const Register = () => {
             <span className="icon">🔒</span>
           </div>
 
-          {/* Submit Button */}
-          <button type="submit" className="register-btn">
-            Register
-          </button>
-        </form>
+          <button type="submit" className="register-btn">Register</button>
 
-        <p className="login-text">
-          Already have an account? <a href="/login">Login</a>
-        </p>
+          <p className="login-text">
+            Already have an account? <a href="/login">Login</a>
+          </p>
+        </form>
       </div>
     </div>
-    </>
   );
 };
+
 export default Register;

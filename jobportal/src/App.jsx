@@ -1,9 +1,8 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import CompanySlider from "./components/CompanySlider";
-
 import About from "./components/About";
 import Job from "./components/Job";
 import Apply from "./components/Apply";
@@ -11,15 +10,16 @@ import Contactus from "./components/Contactus";
 import Myprofile from "./components/Myprofile";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import AdminDashboard from "./components/AdminDashboard"; // ✅ new import
 
 function App() {
   return (
     <Router>
-      {/* Navbar should always be visible */}
+      {/* Navbar always visible */}
       <Navbar />
 
       <Routes>
-        {/* Home page: Hero section + MNC slider */}
+        {/* Home */}
         <Route
           path="/"
           element={
@@ -38,6 +38,19 @@ function App() {
         <Route path="/Myprofile" element={<Myprofile />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+
+        {/* ✅ Admin-only route */}
+        <Route
+          path="/admin-dashboard"
+          element={
+            localStorage.getItem("LoggedIn") &&
+            localStorage.getItem("userType") === "Admin" ? (
+              <AdminDashboard />
+            ) : (
+              <Navigate to="/login" />
+            )
+          }
+        />
       </Routes>
     </Router>
   );
