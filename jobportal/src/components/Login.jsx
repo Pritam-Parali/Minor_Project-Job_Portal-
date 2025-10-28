@@ -1,10 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const navigate = useNavigate();
+
+  // 🔹 Add test users if not already present
+  useEffect(() => {
+    const existingUsers = JSON.parse(localStorage.getItem("RegisteredUsers")) || [];
+
+    if (existingUsers.length === 0) {
+      const testUsers = [
+        {
+          username: "admin123",
+          password: "admin@123",
+          userType: "Admin",
+        },
+        {
+          username: "user123",
+          password: "user@123",
+          userType: "User",
+        },
+      ];
+      localStorage.setItem("RegisteredUsers", JSON.stringify(testUsers));
+      console.log("✅ Test users added:", testUsers);
+    }
+  }, []);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
