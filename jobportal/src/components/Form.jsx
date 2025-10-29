@@ -80,7 +80,7 @@ function FormExample() {
             Please provide a valid state.
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group as={Col} md="2" controlId="validationCustom05">
+        <Form.Group as={Col} md="4" controlId="validationCustom05">
           <Form.Label>Zip</Form.Label>
           <Form.Control type="text" placeholder="Zip" required />
           <Form.Control.Feedback type="invalid">
