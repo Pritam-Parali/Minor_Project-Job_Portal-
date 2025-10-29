@@ -1,7 +1,7 @@
 
 /* Navbar Container */
 .navbar {
-  background: blue;
+  background: blue !important;
   width:100%;
   height: 70px;
   margin-right: 0px;
