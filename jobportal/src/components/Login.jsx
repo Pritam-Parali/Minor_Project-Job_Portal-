@@ -1,36 +1,59 @@
 import React, { useState } from "react";
 import "./Login.css";
-import Navbar from "./Navbar";
-
 
 const Login = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Welcome, ${formData.username}!`);
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("✅ Login successful!");
+        console.log("User logged in:", data.user);
+
+        // ✅ Redirect to Home page
+        window.location.href = "/";
+      } else {
+        alert(`❌ ${data.message}`);
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("⚠️ Server error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
-  return (<>
-      {/* <Navbar /> */}
+  return (
     <div className="login-page">
       <div className="login-container">
         <h2>Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
               onChange={handleChange}
               required
             />
-            <span className="icon">👤</span>
+            <span className="icon">📧</span>
           </div>
 
           <div className="input-group">
@@ -45,26 +68,16 @@ const Login = () => {
             <span className="icon">🔒</span>
           </div>
 
-          <div className="options">
-            <label>
-              <input type="checkbox" /> Remember Me
-            </label>
-            <a href="/forgot-password" className="forgot-link">
-              Forgot Password?
-            </a>
-          </div>
-
-          <button type="submit" className="login-btn">
-            Login
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
 
         <p className="register-text">
-          Don't have an account? <a href="/register">Register</a>
+          Don’t have an account? <a href="/register">Register</a>
         </p>
       </div>
     </div>
-    </>
   );
 };
 
