@@ -15,7 +15,7 @@ const Register = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
@@ -23,13 +23,34 @@ const Register = () => {
       return;
     }
 
-    // Save user data in localStorage
-    localStorage.setItem("userType", formData.userType);
-    localStorage.setItem("setusername", formData.username);
-    localStorage.setItem("LoggedIn", "true");
+    try {
+      const response = await fetch("http://localhost:5000/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userType: formData.userType,
+          username: formData.username,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+        }),
+      });
 
-    alert(`Welcome ${formData.userType}, ${formData.username}! Registration successful.`);
-    window.location.href = formData.userType === "Admin" ? "/admin-dashboard" : "/myprofile";
+      const result = await response.json();
+
+      if (response.ok) {
+        alert(`✅ ${result.message}`);
+        window.location.href =
+          formData.userType === "Admin" ? "/admin-dashboard" : "/login";
+      } else {
+        alert(`⚠️ ${result.message}`);
+      }
+    } catch (error) {
+      console.error("Error during registration:", error);
+      alert("❌ Server error. Please try again later.");
+    }
   };
 
   return (
@@ -39,7 +60,12 @@ const Register = () => {
         <form onSubmit={handleSubmit}>
           {/* User Type Dropdown */}
           <div className="input-group">
-            <select name="userType" value={formData.userType} onChange={handleChange} required>
+            <select
+              name="userType"
+              value={formData.userType}
+              onChange={handleChange}
+              required
+            >
               <option value="User">👤 User</option>
               <option value="Admin">👑 Admin</option>
             </select>
@@ -110,7 +136,9 @@ const Register = () => {
             <span className="icon">🔒</span>
           </div>
 
-          <button type="submit" className="register-btn">Register</button>
+          <button type="submit" className="register-btn">
+            Register
+          </button>
 
           <p className="login-text">
             Already have an account? <a href="/login">Login</a>
