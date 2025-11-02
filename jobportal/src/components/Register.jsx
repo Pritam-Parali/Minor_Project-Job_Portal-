@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import "./Register.css";
-import Navbar from "./Navbar";
+import Navbar from "./Navbar"; // ✅ kept from sayan branch
 
 const Register = () => {
   const [formData, setFormData] = useState({
+    userType: "User",
     username: "",
     email: "",
     phone: "",
@@ -35,6 +36,7 @@ const Register = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          userType: formData.userType,
           username: formData.username,
           email: formData.email,
           phone: formData.phone,
@@ -42,24 +44,34 @@ const Register = () => {
         }),
       });
 
-      const data = await response.json();
+      const result = await response.json();
 
       if (!response.ok) {
-        alert(data.message || "Registration failed");
+        alert(result.message || "⚠️ Registration failed");
       } else {
-        alert("🎉 Registration successful!");
-        console.log("Server response:", data);
+        alert(`✅ ${result.message || "Registration successful!"}`);
+        console.log("Server response:", result);
+
+        // Clear form
         setFormData({
+          userType: "User",
           username: "",
           email: "",
           phone: "",
           password: "",
           confirmPassword: "",
         });
+
+        // Redirect if admin
+        if (formData.userType === "Admin") {
+          window.location.href = "/admin-dashboard";
+        } else {
+          window.location.href = "/login";
+        }
       }
     } catch (error) {
-      console.error("Error:", error);
-      alert("Something went wrong. Please try again.");
+      console.error("Error during registration:", error);
+      alert("❌ Server error. Please try again later.");
     } finally {
       setLoading(false);
     }
@@ -67,11 +79,26 @@ const Register = () => {
 
   return (
     <>
+      {/* ✅ Optional Navbar */}
       {/* <Navbar /> */}
+
       <div className="register-page">
         <div className="register-container">
           <h2>Create Account</h2>
           <form onSubmit={handleSubmit}>
+            {/* User Type Dropdown */}
+            <div className="input-group">
+              <select
+                name="userType"
+                value={formData.userType}
+                onChange={handleChange}
+                required
+              >
+                <option value="User">👤 User</option>
+                <option value="Admin">👑 Admin</option>
+              </select>
+            </div>
+
             {/* Username */}
             <div className="input-group">
               <input

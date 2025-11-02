@@ -1,15 +1,16 @@
-
 /* Navbar Container */
 .navbar {
   background: blue !important;
-  width:100%;
+  width: 100%;
   height: 70px;
   margin-right: 0px;
-  box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
   position: sticky;
-  top:0; 
+  top: 0;
+  z-index: 1000;
 }
 
+/* Navbar Items */
 .navbar nav ul {
   display: flex;
   align-items: center;
@@ -23,6 +24,8 @@
 .navbar nav ul li {
   margin: 0 10px;
 }
+
+/* Navbar Links */
 .navbar nav ul li .nav {
   color: #fff;
   text-decoration: none;
@@ -32,13 +35,12 @@
   margin-right: 20px;
 }
 
-
 .navbar nav ul li .nav:hover {
   background-color: #fff;
   color: red;
 }
 
-/* Full Navbar Hover Effect Line */
+/* Hover underline on full navbar */
 .navbar::before {
   content: '';
   position: absolute;
@@ -57,13 +59,7 @@
   transform-origin: bottom left;
 }
 
-/* Jobnest Logo */
-.jobnest-logo {
-  height: 100px;
-  width: 100px;
-  transition: all .3s ease;
-  filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.4));
-}
+/* Logo */
 .jobnest-logo {
   height: 40px;
   width: auto;
@@ -71,6 +67,7 @@
   border-radius: 50px;
   margin-left: -50px;
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
 }
 
 .jobnest-logo:hover {
@@ -78,7 +75,7 @@
   filter: drop-shadow(0px 0px 12px #00f7ff);
 }
 
-/* Navbar Links */
+/* Navbar Links Animation */
 .nav {
   text-decoration: none;
   font-size: 1rem;
@@ -89,11 +86,9 @@
   text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.7);
   position: relative;
   overflow: hidden;
-  line-height: 1.5;
   display: inline-block;
 }
 
-/* Individual Link Underline Effect */
 .nav::after {
   content: '';
   position: absolute;
@@ -105,27 +100,24 @@
   transform: scaleX(0);
   transform-origin: bottom left;
   transition: transform 0.3s ease-out;
-  
 }
 
 .nav:hover::after {
-  
   transform: scaleX(1);
 }
 
-/* Navbar Links Hover Effects (background & shadow) */
 .nav:hover {
-  
   background: #0056b3;
   border-radius: 6px;
   transform: scale(1.05);
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
   text-shadow: 0px 0px 8px #f1c40f, 0px 0px 12px #fff;
 }
 
-/* Login & Profile Buttons */
+/* Login, Profile, Logout Buttons */
 .login,
-.myprofile {
+.myprofile,
+.logout-btn {
   text-decoration: none;
   padding: 8px 16px;
   background: #007bff;
@@ -133,36 +125,40 @@
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
-  text-shadow: 0px 0px 8px rgba(0,0,0,0.6);
-  display: inline-block; 
+  border: none;
+  cursor: pointer;
+  text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+  display: inline-block;
 }
 
-/* New Hover Effect for Buttons (Lifts and Scales) */
-/* Hover Effect for Buttons */
 .login:hover,
 .myprofile:hover {
-  transform: scale(1.3); /* Makes the button 10% bigger on hover */
+  transform: scale(1.3);
   background: #0056b3;
-  box-shadow: 0px 6px 15px rgba(0,0,0,0.3);
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
   text-shadow: 0px 0px 10px #00ffea;
 }
 
+/* Logout Specific Style */
+.logout-btn {
+  background: #ff4b4b;
+}
 
-
+.logout-btn:hover {
+  transform: scale(1.3);
+  background: #e84118;
+  box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.3);
+  text-shadow: 0px 0px 10px #ffcccc;
+}
 
 /* Search Box */
-
-
-
-
 .navbar ul .search-box {
   margin-left: 100px;
   margin-right: 110px;
   display: flex;
   justify-content: center;
   align-items: center;
-  
 }
 
 .search-box input {
@@ -181,63 +177,37 @@
 }
 
 .search-button {
-    width: 40px; 
-    height: 35px;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    background-color: rgb(183, 223, 239);
-    color: white;
-
-    /* Shape and spacing */
-    border-radius: 5px 5px 5px 5px; 
-    padding: 0;
-    
-    /* Center the icon (if it's a font icon or SVG) */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
-    transition: background-color 0.2s ease, transform 0.1s ease;
-}
-
-.search-button {
-    font-size: 18px; 
-    line-height: 1; 
+  width: 40px;
+  height: 35px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: rgb(183, 223, 239);
+  color: white;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .search-button:hover {
-    background-color: #f0f0f0;
-    color: #007bff; 
+  background-color: #f0f0f0;
+  color: #007bff;
 }
 
 .search-button:active {
-    background-color: #e0e0e0; 
-    transform: scale(0.98); 
+  background-color: #e0e0e0;
+  transform: scale(0.98);
 }
 
 .search-button:focus {
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); 
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5);
 }
 
-.navbar nav ul li .myprofile:hover {
-  background-color: whitesmoke;
-  color: blue;
-}
-
-.navbar nav ul li .login {
-  color: white;
-  font-size: small;
-  margin: auto;
-  text-decoration: none;
-}
-
-.navbar nav ul li .login:hover {
-  background-color: whitesmoke;
-  color: blue;
-}
-.right-side-elements{
+/* Right-side alignment for buttons and search */
+.right-side-elements {
   display: flex;
   justify-content: space-around;
-  align-items: flex-end;
+  align-items: center;
 }

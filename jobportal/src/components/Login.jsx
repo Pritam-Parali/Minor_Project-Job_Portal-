@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import "./Login.css";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,10 +26,13 @@ const Login = () => {
 
       if (response.ok) {
         alert("✅ Login successful!");
-        console.log("User logged in:", data.user);
 
-        // ✅ Redirect to Home page
-        window.location.href = "/";
+        // ✅ Store login state
+        localStorage.setItem("LoggedIn", "true");
+        localStorage.setItem("userEmail", formData.email);
+
+        // ✅ Redirect to Home or Admin Dashboard if needed
+        navigate("/");
       } else {
         alert(`❌ ${data.message}`);
       }
