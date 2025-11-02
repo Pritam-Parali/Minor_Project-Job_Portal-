@@ -20,14 +20,15 @@ const Navbar = () => {
             <li><NavLink to="/About" className="nav">About</NavLink></li>
             <li><NavLink to="/Job" className="nav">Job</NavLink></li>
             <li><NavLink to="/Contactus" className="nav">Contact</NavLink></li>
-            
+            <li className="right-side-elements">
             <li className="search-box">
-              <input type="text" placeholder="search" />
+              <input type="text" placeholder="Type here to search" />
               <button className="search-button">🔍</button>
-              {/* <img src={search} alt="Search" className="logo" /> */}
+              
             </li>
             <li><NavLink to="/Myprofile" className={"myprofile"}>Profile</NavLink></li>
             <li><NavLink to="/Login" className={"login"}>Login</NavLink></li> 
+            </li>
           </ul>
         </nav>
       </div>

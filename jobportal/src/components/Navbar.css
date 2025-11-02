@@ -1,9 +1,9 @@
 
 /* Navbar Container */
 .navbar {
-  background: blue;
+  background: blue !important;
   width:100%;
-  height: 100px;
+  height: 70px;
   margin-right: 0px;
   box-shadow: 0px 4px 15px rgba(0,0,0,0.2);
   position: sticky;
@@ -11,17 +11,32 @@
 }
 
 .navbar nav ul {
-  list-style: none;
   display: flex;
-  flex-direction: row;   
   align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  
+  list-style: none;
   margin: 0;
+  margin-top: 10px;
+  margin-left: 100px;
   padding: 0;
 }
 
+.navbar nav ul li {
+  margin: 0 10px;
+}
+.navbar nav ul li .nav {
+  color: #fff;
+  text-decoration: none;
+  margin-left: 20px;
+  padding: 3px 7px;
+  font-weight: bolder;
+  margin-right: 20px;
+}
+
+
+.navbar nav ul li .nav:hover {
+  background-color: #fff;
+  color: red;
+}
 
 /* Full Navbar Hover Effect Line */
 .navbar::before {
@@ -48,6 +63,14 @@
   width: 100px;
   transition: all .3s ease;
   filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.4));
+}
+.jobnest-logo {
+  height: 40px;
+  width: auto;
+  cursor: pointer;
+  border-radius: 50px;
+  margin-left: -50px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
 }
 
 .jobnest-logo:hover {
@@ -110,9 +133,9 @@
   border-radius: 8px;
   font-size: 0.9rem;
   font-weight: 500;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Only transition the properties we need */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; 
   text-shadow: 0px 0px 8px rgba(0,0,0,0.6);
-  display: inline-block; /* Crucial for transform to work correctly on these elements */
+  display: inline-block; 
 }
 
 /* New Hover Effect for Buttons (Lifts and Scales) */
@@ -125,7 +148,23 @@
   text-shadow: 0px 0px 10px #00ffea;
 }
 
+
+
+
 /* Search Box */
+
+
+
+
+.navbar ul .search-box {
+  margin-left: 100px;
+  margin-right: 110px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}
+
 .search-box input {
   padding: 6px 12px;
   border-radius: 6px;
@@ -179,4 +218,26 @@
 
 .search-button:focus {
     box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); 
+}
+
+.navbar nav ul li .myprofile:hover {
+  background-color: whitesmoke;
+  color: blue;
+}
+
+.navbar nav ul li .login {
+  color: white;
+  font-size: small;
+  margin: auto;
+  text-decoration: none;
+}
+
+.navbar nav ul li .login:hover {
+  background-color: whitesmoke;
+  color: blue;
+}
+.right-side-elements{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
 }

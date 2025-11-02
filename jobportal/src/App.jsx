@@ -11,6 +11,8 @@ import Contactus from "./components/Contactus";
 import Myprofile from "./components/Myprofile";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import Form from "./components/Form.jsx";
+
 
 function App() {
   return (
@@ -38,6 +40,7 @@ function App() {
         <Route path="/Myprofile" element={<Myprofile />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/Form" element={<Form />} />
       </Routes>
     </Router>
   );
