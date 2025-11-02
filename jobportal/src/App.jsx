@@ -10,7 +10,8 @@ import Contactus from "./components/Contactus";
 import Myprofile from "./components/Myprofile";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import AdminDashboard from "./components/AdminDashboard"; // ✅ new import
+import AdminDashboard from "./components/AdminDashboard"; // ✅ from HEAD
+import Form from "./components/Form.jsx"; // ✅ from sayan
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
         <Route path="/Myprofile" element={<Myprofile />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
+        <Route path="/Form" element={<Form />} />
 
         {/* ✅ Admin-only route */}
         <Route

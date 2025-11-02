@@ -1,0 +1,20 @@
+.job-post-create{
+    height: auto;
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    
+}
+
+.button-create-job{
+        margin-right: 40px;
+        height: 40px;
+        width: 100px;
+    }
+
+.button-create-job:hover{
+    transition: .3s ease-in-out;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    
+}

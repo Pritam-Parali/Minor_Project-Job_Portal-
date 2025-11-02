@@ -23,22 +23,26 @@ const Navbar = () => {
       <div className="navbar">
         <nav>
           <ul>
+            {/* Logo */}
             <li>
               <NavLink to="/" className="logo-link">
                 <img src={jobnest} alt="Jobnest Logo" className="jobnest-logo" />
               </NavLink>
             </li>
 
+            {/* Navigation links */}
             <li><NavLink to="/" className="nav">Home</NavLink></li>
             <li><NavLink to="/About" className="nav">About</NavLink></li>
             <li><NavLink to="/Job" className="nav">Job</NavLink></li>
             <li><NavLink to="/Contactus" className="nav">Contact</NavLink></li>
 
+            {/* Search Box */}
             <li className="search-box">
-              <input type="text" placeholder="search" />
+              <input type="text" placeholder="Type here to search" />
               <button className="search-button">🔍</button>
             </li>
 
+            {/* Auth / Profile Section */}
             {!isLoggedIn ? (
               <li>
                 <NavLink to="/Login" className="login">Login</NavLink>

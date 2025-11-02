@@ -1,0 +1,24 @@
+.heading{
+    margin-top: 10px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: bolder;
+    text-decoration: solid underline blue;
+}
+
+
+.form-page{
+    padding-top: 10px;
+    padding-left: 10px;
+    background-color: rgb(167, 167, 187);
+    padding-right: 10px;
+    padding-bottom: 10px;
+}
+
+.basic-details{
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 10px;
+    text-decoration: solid underline blue;
+}

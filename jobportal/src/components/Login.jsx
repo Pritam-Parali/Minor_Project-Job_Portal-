@@ -3,45 +3,44 @@ import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [formData, setFormData] = useState({ username: "", password: "" });
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
-    const allUsers = JSON.parse(localStorage.getItem("RegisteredUsers")) || [];
-    const foundUser = allUsers.find(
-      (u) =>
-        u.username === formData.username && u.password === formData.password
-    );
+    try {
+      const response = await fetch("http://localhost:5000/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
 
-    if (!foundUser) {
-      alert("Invalid username or password!");
-      return;
-    }
+      const data = await response.json();
 
-    // Generate and verify OTP
-    const otp = Math.floor(100000 + Math.random() * 900000);
-    alert("Your OTP is: " + otp);
-    const enteredOtp = prompt("Enter OTP:");
+      if (response.ok) {
+        alert("✅ Login successful!");
 
-    if (String(otp) === enteredOtp) {
-      alert("Login Successful!");
-      localStorage.setItem("LoggedIn", "true");
-      localStorage.setItem("setusername", foundUser.username);
-      localStorage.setItem("userType", foundUser.userType);
+        // ✅ Store login state
+        localStorage.setItem("LoggedIn", "true");
+        localStorage.setItem("userEmail", formData.email);
 
-      if (foundUser.userType === "Admin") {
-        navigate("/admin-dashboard");
+        // ✅ Redirect to Home or Admin Dashboard if needed
+        navigate("/");
       } else {
-        navigate("/index");
+        alert(`❌ ${data.message}`);
       }
-    } else {
-      alert("Invalid OTP. Try again.");
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("⚠️ Server error. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,14 +51,14 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              value={formData.email}
               onChange={handleChange}
               required
             />
-            <span className="icon">👤</span>
+            <span className="icon">📧</span>
           </div>
 
           <div className="input-group">
@@ -74,11 +73,13 @@ const Login = () => {
             <span className="icon">🔒</span>
           </div>
 
-          <button type="submit" className="login-btn">Login</button>
+          <button type="submit" className="login-btn" disabled={loading}>
+            {loading ? "Logging in..." : "Login"}
+          </button>
         </form>
 
         <p className="register-text">
-          Don't have an account? <a href="/register">Register</a>
+          Don’t have an account? <a href="/register">Register</a>
         </p>
       </div>
     </div>

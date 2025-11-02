@@ -1,6 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
+import Button from 'react-bootstrap/Button';
+import './Job.css';
+
 
 const Job = () => {
   const navigate = useNavigate();
@@ -16,12 +19,21 @@ const Job = () => {
   const handleApply = (jobId) => {
     navigate(`/apply/${jobId}`); 
   };
+  const handleCreateJob =() =>{
+    navigate('/Form');
+  };
+
 
   return (
     <>
       {/* <Navbar /> */}
       <div style={{ padding: "20px" }}>
         <h1 style={{ textAlign: "center" }}>Job Postings</h1>
+        <div className="job-post-create">
+          <Button variant="primary" className="button-create-job" onClick={handleCreateJob}>Create Job</Button>
+          </div>
+
+
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))", gap: "20px", marginTop: "20px" }}>
           {jobs.map((job) => (
             <div
