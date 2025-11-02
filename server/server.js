@@ -22,7 +22,7 @@ connectDB();
 // ✅ CORS setup (important fix)
 app.use(
   cors({
-    origin: "http://localhost:5174", // where your frontend runs
+    origin: "http://localhost:5173", // where your frontend runs
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
