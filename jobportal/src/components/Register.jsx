@@ -49,6 +49,8 @@ const Register = () => {
       } else {
         alert("🎉 Registration successful!");
         console.log("Server response:", data);
+        // ✅ Redirect to Login page
+        window.location.href = "/Login";
         setFormData({
           username: "",
           email: "",

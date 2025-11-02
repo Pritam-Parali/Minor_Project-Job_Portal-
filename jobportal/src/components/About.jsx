@@ -111,7 +111,7 @@ const About = () => {
               <h3 className="textpart_heading">Global Reach</h3>
               <br />
               <p className="textpart_paragraph">
-                Connecting opportunities across the globe, making the world a smaller place for career growth. 
+                Connecting opportunities across the globe, making the world a smaller place for career growth.
               </p>
             </div>
           </div>
@@ -138,7 +138,7 @@ const About = () => {
             <img src={sayan} alt="SAYAN"></img>
             <h3 className="h3">SAYAN BISWAS</h3>
           </div>
-          
+
 
         </div>
         <div className="div4">
@@ -148,44 +148,44 @@ const About = () => {
           </div>
           <div className="innerdiv4">
             <img src={supriya} alt="SUPRIYA"></img>
-            <h3 className="h3">SUPRIYA MATTABAR</h3>
+            <h3 className="h3">SUPRIYA MATABBAR</h3>
           </div>
- 
+
         </div>
-        
+
       </section>
 
       <section className="section5">
         <div className="outerdiv5">
-        <h2>Special thanks to our Mentor</h2>
+          <h2>Special thanks to our Mentor</h2>
           <div className="innerdiv5">
             <img src={ali} alt="ALI SIR"></img>
             <h3>Ashraf Ali </h3>
           </div>
         </div>
       </section>
-<footer className="footer">
+      <footer className="footer">
 
-      <div className="outerdiv">
-        <div className="innerdiv">
-          <h2>1+ </h2>
-          <p>Years of experience</p>
+        <div className="outerdiv">
+          <div className="innerdiv">
+            <h2>1+ </h2>
+            <p>Years of experience</p>
+          </div>
+          <div className="innerdiv">
+            <h2>45k+ </h2>
+            <p>Active Users</p>
+          </div>
+          <div className="innerdiv">
+            <h2>850+ </h2>
+            <p>Partner Companies</p>
+          </div>
+          <div className="innerdiv">
+            <h2>94% </h2>
+            <p>Success Rate</p>
+          </div>
         </div>
-        <div className="innerdiv">
-          <h2>45k+ </h2>
-          <p>Active Users</p>
-        </div>
-        <div className="innerdiv">
-          <h2>850+ </h2>
-          <p>Partner Companies</p>
-        </div>
-        <div className="innerdiv">
-          <h2>94% </h2>
-          <p>Success Rate</p>
-        </div>
-      </div>
 
-</footer>
+      </footer>
 
 
     </>
