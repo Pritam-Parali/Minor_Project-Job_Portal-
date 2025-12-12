@@ -1,3 +1,4 @@
+// src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
@@ -13,6 +14,7 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import Form from "./components/Form.jsx";
 
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -34,7 +36,17 @@ function App() {
 
         {/* Other pages */}
         <Route path="/About" element={<About />} />
-        <Route path="/Job" element={<Job />} />
+
+        {/* PROTECTED: Job page requires valid JWT */}
+        <Route
+          path="/Job"
+          element={
+            <ProtectedRoute>
+              <Job />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="/apply/:jobId" element={<Apply />} />
         <Route path="/Contactus" element={<Contactus />} />
         <Route path="/Myprofile" element={<Myprofile />} />
