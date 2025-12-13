@@ -36,43 +36,26 @@ const Job = () => {
   };
 
   if (loading) {
-    return <h3 style={{ textAlign: "center" }}>Loading jobs...</h3>;
+    return <h3 className="loading-text">Loading jobs...</h3>;
   }
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h1 style={{ textAlign: "center" }}>Job Postings</h1>
 
-      <div className="job-post-create">
-        <Button variant="primary" onClick={handleCreateJob}>
+    <div className="job-header">
+      <h1 className="job-title">Job Postings</h1>
+
+      
+        <Button variant="primary" onClick={handleCreateJob} className="button-create-job">
           Create Job
         </Button>
-      </div>
+      
 
       {jobs.length === 0 ? (
-        <h4 style={{ textAlign: "center", marginTop: "20px" }}>
-          No jobs posted yet
-        </h4>
+        <h4 className="no-jobs-text">No jobs posted yet</h4>
       ) : (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(350px, 1fr))",
-            gap: "20px",
-            marginTop: "20px",
-          }}
-        >
+        <div className="job-grid">
           {jobs.map((job) => (
-            <div
-              key={job._id}
-              style={{
-                border: "1px solid #ccc",
-                borderRadius: "10px",
-                padding: "20px",
-                background: "#f9f9f9",
-                boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-              }}
-            >
+            <div key={job._id} className="job-card">
               {/* JOB BASIC INFO */}
               <h3>{job.domain}</h3>
               <p><strong>Company:</strong> {job.companyName}</p>
@@ -135,7 +118,7 @@ const Job = () => {
 
               <Button
                 variant="success"
-                style={{ marginTop: "10px" }}
+                className="apply-btn"
                 onClick={() => handleApply(job._id)}
               >
                 Apply
