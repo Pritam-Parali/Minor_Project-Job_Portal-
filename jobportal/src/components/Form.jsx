@@ -6,6 +6,8 @@ import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Row from 'react-bootstrap/Row';
+import { createJob, getJobs } from "../api/jobService";
+import Swal from 'sweetalert2';  
 
 function FormExample() {
   const [validated, setValidated] = useState(false);
@@ -15,6 +17,16 @@ function FormExample() {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+    } else {
+      Swal.fire({
+      title: "Good job!",
+      text: "Submitted",
+      icon: "success",
+      timer: 1000,               
+      showConfirmButton: false,  
+      allowOutsideClick: false,  
+      allowEscapeKey: false      
+});
     }
 
     setValidated(true);
