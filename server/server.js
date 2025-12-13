@@ -8,6 +8,8 @@ import { fileURLToPath } from "url";
 import connectDB from "./config/db.js";
 import registerRoutes from "./routes/registerRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
+import jobRoutes from "./routes/jobRoutes.js";
+
 
 // ✅ Load environment variables
 dotenv.config();
@@ -68,3 +70,4 @@ app.get("/", (req, res) => res.send("✅ API is running"));
 app.listen(PORT, () =>
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 );
+app.use("/api/jobs", jobRoutes);
