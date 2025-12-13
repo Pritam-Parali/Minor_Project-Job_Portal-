@@ -39,7 +39,6 @@ function FormExample() {
     remoteOption: "",
     companyWebsite: "",
     contactNumber: "",
-    jobFile: null,
   });
 
   // text/select handler
@@ -217,7 +216,7 @@ function FormExample() {
                 name="salary"
                 value={jobData.salary}
                 onChange={handleChange}
-                placeholder="Salary"
+                placeholder="Salary in LPA (e.g 10Lpa)"
               />
             </Form.Group>
 
@@ -359,11 +358,7 @@ function FormExample() {
             </Form.Group>
           </Row>
 
-          {/* FILE UPLOAD */}
-          <Form.Group className="mb-3">
-            <Form.Label>Upload Job Description File</Form.Label>
-            <Form.Control type="file" onChange={handleFileChange} />
-          </Form.Group>
+          
 
           <Button type="submit">Submit form</Button>
         </Form>
