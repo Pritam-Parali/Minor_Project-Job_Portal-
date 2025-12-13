@@ -5,11 +5,11 @@ import dotenv from "dotenv";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
+
 import connectDB from "./config/db.js";
 import registerRoutes from "./routes/registerRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
-
 
 // ✅ Load environment variables
 dotenv.config();
@@ -21,10 +21,10 @@ const PORT = process.env.PORT || 5000;
 // ✅ Connect to MongoDB
 connectDB();
 
-// ✅ CORS setup (important fix)
+// ✅ CORS
 app.use(
   cors({
-    origin: "http://localhost:5174", // where your frontend runs
+    origin: "http://localhost:5173",
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
   })
@@ -34,15 +34,16 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Fix for __dirname in ES modules
+// ✅ Fix __dirname (ES modules)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ Routes
+// ================= ROUTES =================
 app.use("/api/users", registerRoutes);
 app.use("/api/users", loginRoutes);
+app.use("/api/jobs", jobRoutes); // ✅ MOVED HERE
 
-// ✅ Multer setup for CV uploads
+// ================= CV UPLOAD (SEPARATE FEATURE) =================
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -51,23 +52,23 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
+
 const upload = multer({ storage });
 
-// ✅ Job application upload route
 app.post("/api/apply", upload.single("cv"), (req, res) => {
   console.log("Form fields:", req.body);
   console.log("Uploaded file:", req.file);
+
   res.json({ message: "📄 Application received successfully!" });
 });
 
-// ✅ Serve uploaded files
+// ================= STATIC FILES =================
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// ✅ Test route
+// ================= TEST ROUTE =================
 app.get("/", (req, res) => res.send("✅ API is running"));
 
-// ✅ Start server
+// ================= START SERVER =================
 app.listen(PORT, () =>
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 );
-app.use("/api/jobs", jobRoutes);

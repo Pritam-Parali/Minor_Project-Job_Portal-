@@ -1,118 +1,234 @@
 import React, { useState } from "react";
-import Navbar from "./Navbar";
-import './Form.css';
-import Button from 'react-bootstrap/Button';
-import Col from 'react-bootstrap/Col';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Row from 'react-bootstrap/Row';
-import { createJob, getJobs } from "../api/jobService";
-import Swal from 'sweetalert2';  
+import "./Form.css";
+import { useNavigate } from "react-router-dom";
+
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
+
+import Swal from "sweetalert2";
+import { createJob } from "../api/jobService";
+
 
 function FormExample() {
   const [validated, setValidated] = useState(false);
+  const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  // ✅ ALL FIELDS + FILE
+  const [jobData, setJobData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    city: "",
+    state: "",
+    zip: "",
+    domain: "",
+    companyName: "",
+    jobLocation: "",
+    salary: "",
+    jobType: "",
+    experienceLevel: "",
+    qualifications: "",
+    skills: "",
+    description: "",
+    applicationDeadline: "",
+    startDate: "",
+    workHours: "",
+    remoteOption: "",
+    companyWebsite: "",
+    contactNumber: "",
+    jobFile: null,
+  });
+
+  // text/select handler
+  const handleChange = (e) => {
+    setJobData({ ...jobData, [e.target.name]: e.target.value });
+  };
+
+  // file handler
+  const handleFileChange = (e) => {
+    setJobData({ ...jobData, jobFile: e.target.files[0] });
+  };
+
+  // submit
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     const form = event.currentTarget;
+
     if (form.checkValidity() === false) {
-      event.preventDefault();
       event.stopPropagation();
-    } else {
-      Swal.fire({
-      title: "Good job!",
-      text: "Submitted",
-      icon: "success",
-      timer: 1000,               
-      showConfirmButton: false,  
-      allowOutsideClick: false,  
-      allowEscapeKey: false      
-});
+      setValidated(true);
+      return;
     }
 
-    setValidated(true);
+    try {
+      const formData = new FormData();
+      Object.keys(jobData).forEach((key) => {
+        if (jobData[key] !== null) {
+          formData.append(key, jobData[key]);
+        }
+      });
+
+      await createJob(formData);
+
+      Swal.fire({
+        icon: "success",
+        title: "Job Posted",
+        text: "Job saved successfully",
+        timer: 1500,
+        showConfirmButton: false,
+      }).then(() => {
+        navigate("/job"); 
+      });
+
+      setValidated(false);
+    } catch (error) {
+      Swal.fire("Error", "Job not saved", "error");
+      console.error(error);
+    }
   };
 
   return (
     <>
-      <div>
-        <h6 className="heading">Job posting Details</h6>
-      </div>
+      <h6 className="heading">Job posting Details</h6>
+
       <div className="form-page">
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          {/* BASIC INFO */}
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationCustom01">
+            <Form.Group as={Col} md="4">
               <Form.Label>First name</Form.Label>
-              <Form.Control required type="text" placeholder="First name*" />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control
+                required
+                name="firstName"
+                value={jobData.firstName}
+                onChange={handleChange}
+                placeholder="First name*"
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom02">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Last name*</Form.Label>
-              <Form.Control required type="text" placeholder="Last name*" />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control
+                required
+                name="lastName"
+                value={jobData.lastName}
+                onChange={handleChange}
+                placeholder="Last name*"
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Email id*</Form.Label>
-              <InputGroup hasValidation>
-                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                <Form.Control type="email" placeholder="Email id" required />
-                <Form.Control.Feedback type="invalid">
-                  Please choose a valid email.
-                </Form.Control.Feedback>
+              <InputGroup>
+                <InputGroup.Text>@</InputGroup.Text>
+                <Form.Control
+                  required
+                  type="email"
+                  name="email"
+                  value={jobData.email}
+                  onChange={handleChange}
+                  placeholder="Email id"
+                />
               </InputGroup>
             </Form.Group>
           </Row>
 
+          {/* LOCATION */}
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationCustom03">
+            <Form.Group as={Col} md="4">
               <Form.Label>City</Form.Label>
-              <Form.Control type="text" placeholder="City" required />
-              <Form.Control.Feedback type="invalid">
-                Please provide a valid city.
-              </Form.Control.Feedback>
+              <Form.Control
+                required
+                name="city"
+                value={jobData.city}
+                onChange={handleChange}
+                placeholder="City"
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom04">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>State</Form.Label>
-              <Form.Control type="text" placeholder="State" required />
-              <Form.Control.Feedback type="invalid">
-                Please provide a valid state.
-              </Form.Control.Feedback>
+              <Form.Control
+                required
+                name="state"
+                value={jobData.state}
+                onChange={handleChange}
+                placeholder="State"
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom05">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Zip</Form.Label>
-              <Form.Control type="text" placeholder="Zip" required />
-              <Form.Control.Feedback type="invalid">
-                Please provide a valid zip.
-              </Form.Control.Feedback>
+              <Form.Control
+                required
+                name="zip"
+                value={jobData.zip}
+                onChange={handleChange}
+                placeholder="Zip"
+              />
             </Form.Group>
           </Row>
 
+          {/* JOB DETAILS */}
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationCustom06">
+            <Form.Group as={Col} md="4">
               <Form.Label>Domain*</Form.Label>
-              <Form.Control required type="text" placeholder="Type Domain" />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control
+                required
+                name="domain"
+                value={jobData.domain}
+                onChange={handleChange}
+                placeholder="Type Domain"
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom07">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Company name*</Form.Label>
-              <Form.Control required type="text" placeholder="Type Company Name here" />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control
+                required
+                name="companyName"
+                value={jobData.companyName}
+                onChange={handleChange}
+                placeholder="Type Company Name here"
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom08">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Job Location*</Form.Label>
-              <Form.Control required type="text" placeholder="Location" />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control
+                required
+                name="jobLocation"
+                value={jobData.jobLocation}
+                onChange={handleChange}
+                placeholder="Location"
+              />
             </Form.Group>
           </Row>
 
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationCustom09">
+            <Form.Group as={Col} md="4">
               <Form.Label>Salary*</Form.Label>
-              <Form.Control required type="number" placeholder="Salary" />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control
+                required
+                type="number"
+                name="salary"
+                value={jobData.salary}
+                onChange={handleChange}
+                placeholder="Salary"
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom10">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Job Type</Form.Label>
-              <Form.Select required>
+              <Form.Select
+                required
+                name="jobType"
+                value={jobData.jobType}
+                onChange={handleChange}
+              >
                 <option value="">Select...</option>
                 <option>Full-time</option>
                 <option>Part-time</option>
@@ -120,9 +236,15 @@ function FormExample() {
                 <option>Contract</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom11">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Experience Level</Form.Label>
-              <Form.Select required>
+              <Form.Select
+                required
+                name="experienceLevel"
+                value={jobData.experienceLevel}
+                onChange={handleChange}
+              >
                 <option value="">Select...</option>
                 <option>Entry-level</option>
                 <option>Mid-level</option>
@@ -131,73 +253,116 @@ function FormExample() {
             </Form.Group>
           </Row>
 
+          {/* EXTRA DETAILS */}
           <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationCustom12">
+            <Form.Group as={Col} md="6">
               <Form.Label>Required Qualifications</Form.Label>
-              <Form.Control type="text" placeholder="e.g., B.Tech, MCA, MBA" />
+              <Form.Control
+                name="qualifications"
+                value={jobData.qualifications}
+                onChange={handleChange}
+                placeholder="e.g., B.Tech, MCA, MBA"
+              />
             </Form.Group>
-            <Form.Group as={Col} md="6" controlId="validationCustom13">
+
+            <Form.Group as={Col} md="6">
               <Form.Label>Skills Required</Form.Label>
-              <Form.Control type="text" placeholder="e.g., Python, Excel, Communication" />
+              <Form.Control
+                name="skills"
+                value={jobData.skills}
+                onChange={handleChange}
+                placeholder="e.g., Python, Excel, Communication"
+              />
             </Form.Group>
           </Row>
 
-          <Row className="mb-3">
-            <Form.Group as={Col} md="12" controlId="validationCustom14">
-              <Form.Label>Job Description</Form.Label>
-              <Form.Control as="textarea" rows={3} placeholder="Brief overview of responsibilities" />
-            </Form.Group>
-          </Row>
+          <Form.Group className="mb-3">
+            <Form.Label>Job Description</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={3}
+              name="description"
+              value={jobData.description}
+              onChange={handleChange}
+              placeholder="Brief overview of responsibilities"
+            />
+          </Form.Group>
 
+          {/* DATES & OTHER */}
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationCustom15">
+            <Form.Group as={Col} md="4">
               <Form.Label>Application Deadline</Form.Label>
-              <Form.Control type="date" />
+              <Form.Control
+                type="date"
+                name="applicationDeadline"
+                value={jobData.applicationDeadline}
+                onChange={handleChange}
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom16">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Start Date</Form.Label>
-              <Form.Control type="date" />
+              <Form.Control
+                type="date"
+                name="startDate"
+                value={jobData.startDate}
+                onChange={handleChange}
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom17">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Work Hours</Form.Label>
-              <Form.Control type="text" placeholder="e.g., 9 AM – 6 PM" />
+              <Form.Control
+                name="workHours"
+                value={jobData.workHours}
+                onChange={handleChange}
+                placeholder="e.g., 9 AM – 6 PM"
+              />
             </Form.Group>
           </Row>
 
           <Row className="mb-3">
-            <Form.Group as={Col} md="4" controlId="validationCustom18">
+            <Form.Group as={Col} md="4">
               <Form.Label>Remote Option</Form.Label>
-              <Form.Select>
+              <Form.Select
+                name="remoteOption"
+                value={jobData.remoteOption}
+                onChange={handleChange}
+              >
                 <option value="">Select...</option>
                 <option>Yes</option>
                 <option>No</option>
                 <option>Hybrid</option>
               </Form.Select>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom19">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Company Website</Form.Label>
-              <Form.Control type="url" placeholder="https://google.com" />
+              <Form.Control
+                type="url"
+                name="companyWebsite"
+                value={jobData.companyWebsite}
+                onChange={handleChange}
+                placeholder="https://google.com"
+              />
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom20">
+
+            <Form.Group as={Col} md="4">
               <Form.Label>Contact Number</Form.Label>
-              <Form.Control type="tel" placeholder="e.g., +91-98XXXXXX10" />
+              <Form.Control
+                type="tel"
+                name="contactNumber"
+                value={jobData.contactNumber}
+                onChange={handleChange}
+                placeholder="e.g., +91-98XXXXXX10"
+              />
             </Form.Group>
           </Row>
 
-          <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationCustom21">
-              <Form.Label>Upload Job Description File</Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
-          </Row>
-
+          {/* FILE UPLOAD */}
           <Form.Group className="mb-3">
-            <Form.Check
-              required
-              label="Agree to terms and conditions"
-              feedback="You must agree before submitting."
-              feedbackType="invalid"
-            />
+            <Form.Label>Upload Job Description File</Form.Label>
+            <Form.Control type="file" onChange={handleFileChange} />
           </Form.Group>
 
           <Button type="submit">Submit form</Button>

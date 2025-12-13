@@ -22,6 +22,7 @@ const jobSchema = new mongoose.Schema({
   remoteOption: String,
   companyWebsite: String,
   contactNumber: String,
+  jobFile: String,
 }, { timestamps: true });
 
 export default mongoose.model("Job", jobSchema);

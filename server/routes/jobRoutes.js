@@ -1,12 +1,29 @@
 import express from "express";
+import multer from "multer";
 import Job from "../models/Job.js";
 
 const router = express.Router();
 
-// Create a new job posting
-router.post("/", async (req, res) => {
+/* ================= MULTER CONFIG ================= */
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/"); // folder name
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
+
+const upload = multer({ storage });
+
+/* ================= CREATE JOB ================= */
+router.post("/", upload.single("jobFile"), async (req, res) => {
   try {
-    const job = new Job(req.body);
+    const job = new Job({
+      ...req.body,
+      jobFile: req.file ? req.file.filename : null,
+    });
+
     await job.save();
     res.status(201).json(job);
   } catch (err) {
@@ -14,7 +31,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Get all job postings
+/* ================= GET ALL JOBS ================= */
 router.get("/", async (req, res) => {
   try {
     const jobs = await Job.find();
