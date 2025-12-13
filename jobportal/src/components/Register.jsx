@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./Register.css";
+import { toast } from "react-toastify";
 
 const Register = () => {
   const [step, setStep] = useState("form"); // form | otp
@@ -14,7 +15,6 @@ const Register = () => {
   });
 
   const [otp, setOtp] = useState("");
-  const [msg, setMsg] = useState("");
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -24,12 +24,11 @@ const Register = () => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match");
       return;
     }
 
     setLoading(true);
-    setMsg("");
 
     try {
       const res = await fetch("http://localhost:5000/api/users/register", {
@@ -46,14 +45,14 @@ const Register = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        setMsg(data.message || "Registration failed");
+        toast.error(data.message || "Registration failed");
       } else {
-        setMsg("OTP sent to your email");
+        toast.success("OTP sent to your email 📧");
         setStep("otp");
       }
     } catch (err) {
       console.error(err);
-      setMsg("Something went wrong. Try again.");
+      toast.error("Something went wrong. Try again.");
     } finally {
       setLoading(false);
     }
@@ -63,7 +62,6 @@ const Register = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMsg("");
 
     try {
       const res = await fetch(
@@ -78,14 +76,16 @@ const Register = () => {
       const data = await res.json();
 
       if (!res.ok) {
-        setMsg(data.message || "OTP verification failed");
+        toast.error(data.message || "OTP verification failed");
       } else {
-        alert("Account verified! You can now login.");
-        window.location.href = "/Login";
+        toast.success("Account verified successfully 🎉");
+        setTimeout(() => {
+          window.location.href = "/Login";
+        }, 1500);
       }
     } catch (err) {
       console.error(err);
-      setMsg("Error verifying OTP");
+      toast.error("Error verifying OTP");
     } finally {
       setLoading(false);
     }
@@ -95,12 +95,6 @@ const Register = () => {
     <div className="register-page">
       <div className="register-container">
         <h2>{step === "form" ? "Create Account" : "Verify OTP"}</h2>
-
-        {msg && (
-          <p style={{ color: "yellow", marginBottom: "10px", fontSize: "0.9rem" }}>
-            {msg}
-          </p>
-        )}
 
         {step === "form" && (
           <form onSubmit={handleRegister}>

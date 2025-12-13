@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import API from "../api/axios";
 import "./Login.css";
 
@@ -10,7 +11,6 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
-  const [msg, setMsg] = useState("");
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -19,15 +19,15 @@ const Login = () => {
   const handleSendOtp = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMsg("");
 
     try {
       const res = await API.post("/users/login", formData);
-      setMsg(res.data.message || "OTP sent to email");
+      toast.success(res.data.message || "OTP sent to email");
       setStep("otp");
     } catch (err) {
       console.error(err);
-      setMsg(err.response?.data?.message || "Login failed");
+      const message = err.response?.data?.message || "Login failed";
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -37,7 +37,6 @@ const Login = () => {
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setMsg("");
 
     try {
       const res = await API.post("/users/verify-login-otp", {
@@ -49,10 +48,12 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
+      toast.success("Login successful!");
       navigate("/Job");
     } catch (err) {
       console.error(err);
-      setMsg(err.response?.data?.message || "Invalid OTP");
+      const message = err.response?.data?.message || "Invalid OTP";
+      toast.error(message);
     } finally {
       setLoading(false);
     }
@@ -62,12 +63,6 @@ const Login = () => {
     <div className="login-page">
       <div className="login-container">
         <h2>{step === "credentials" ? "Sign In" : "Enter OTP"}</h2>
-
-        {msg && (
-          <p style={{ color: "yellow", marginBottom: "15px", fontSize: "0.9rem" }}>
-            {msg}
-          </p>
-        )}
 
         {step === "credentials" && (
           <form onSubmit={handleSendOtp}>
