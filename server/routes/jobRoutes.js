@@ -1,6 +1,8 @@
 import express from "express";
 import multer from "multer";
 import Job from "../models/Job.js";
+import { getAllJobs } from "../controllers/jobController.js";
+
 
 const router = express.Router();
 
@@ -41,4 +43,6 @@ router.get("/", async (req, res) => {
   }
 });
 
+// routes/jobRoutes.js
+router.get("/jobs", getAllJobs);
 export default router;
