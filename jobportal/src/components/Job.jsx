@@ -44,11 +44,11 @@ const Job = () => {
     <div className="job-header">
       <h1 className="job-title">Job Postings</h1>
 
-      
+      <div className="button-div">
         <Button variant="primary" onClick={handleCreateJob} className="button-create-job">
           Create Job
         </Button>
-      
+      </div>
 
       {jobs.length === 0 ? (
         <h4 className="no-jobs-text">No jobs posted yet</h4>
