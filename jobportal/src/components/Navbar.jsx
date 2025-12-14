@@ -37,7 +37,7 @@ const Navbar = () => {
           {/* DESKTOP MENU */}
           <nav className="hidden md:flex gap-6 text-gray-700 font-medium">
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/jobs">Jobs</NavLink>
+            <NavLink to="/job">Jobs</NavLink>
             <NavLink to="/about">About</NavLink>
             {isLogged && <NavLink to="/profile">Profile</NavLink>}
           </nav>
@@ -71,7 +71,7 @@ const Navbar = () => {
         {menuOpen && (
           <div className="md:hidden mt-3 flex flex-col gap-3 pb-4 text-gray-700">
             <NavLink to="/" onClick={() => setMenuOpen(false)}>Home</NavLink>
-            <NavLink to="/jobs" onClick={() => setMenuOpen(false)}>Jobs</NavLink>
+            <NavLink to="/job" onClick={() => setMenuOpen(false)}>Jobs</NavLink>
             <NavLink to="/about" onClick={() => setMenuOpen(false)}>About</NavLink>
             {isLogged && (
               <NavLink to="/profile" onClick={() => setMenuOpen(false)}>
