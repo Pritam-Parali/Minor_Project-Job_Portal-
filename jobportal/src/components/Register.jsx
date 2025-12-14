@@ -7,6 +7,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
+    userType: "User",
     username: "",
     email: "",
     phone: "",
@@ -35,6 +36,7 @@ const Register = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          userType: formData.userType,
           username: formData.username,
           email: formData.email,
           phone: formData.phone,
@@ -99,6 +101,18 @@ const Register = () => {
         {step === "form" && (
           <form onSubmit={handleRegister}>
             <div className="input-group">
+              <select
+                name="userType"
+                value={formData.userType}
+                onChange={handleChange}
+                required
+              >
+                <option value="User">👤 User</option>
+                <option value="Admin">👑 Admin</option>
+              </select>
+            </div>
+
+            <div className="input-group">
               <input
                 type="text"
                 name="username"
@@ -107,7 +121,6 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
-              <span className="icon">👤</span>
             </div>
 
             <div className="input-group">
@@ -119,7 +132,6 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
-              <span className="icon">📧</span>
             </div>
 
             <div className="input-group">
@@ -131,7 +143,6 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
-              <span className="icon">📱</span>
             </div>
 
             <div className="input-group">
@@ -143,7 +154,6 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
-              <span className="icon">🔒</span>
             </div>
 
             <div className="input-group">
@@ -155,16 +165,11 @@ const Register = () => {
                 onChange={handleChange}
                 required
               />
-              <span className="icon">🔒</span>
             </div>
 
             <button type="submit" className="register-btn" disabled={loading}>
               {loading ? "Registering..." : "Register"}
             </button>
-
-            <p className="login-text">
-              Already have an account? <a href="/Login">Login</a>
-            </p>
           </form>
         )}
 
@@ -178,7 +183,6 @@ const Register = () => {
                 onChange={(e) => setOtp(e.target.value)}
                 required
               />
-              <span className="icon">🔢</span>
             </div>
 
             <button type="submit" className="register-btn" disabled={loading}>

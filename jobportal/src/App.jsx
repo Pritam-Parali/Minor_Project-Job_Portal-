@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import CompanySlider from "./components/CompanySlider";
-
 import About from "./components/About";
 import Job from "./components/Job";
 import Apply from "./components/Apply";
@@ -23,15 +22,12 @@ function App() {
   return (
     <Router>
       {/* ToastContainer must be mounted once at app root */}
-
-
       <ToastContainer
         position="top-right"
         autoClose={3000}
         hideProgressBar={false}
         newestOnTop={false}
         closeOnClick
-        rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
@@ -41,7 +37,7 @@ function App() {
       <Navbar />
 
       <Routes>
-        {/* Home page: Hero section + MNC slider */}
+        {/* Home */}
         <Route
           path="/"
           element={

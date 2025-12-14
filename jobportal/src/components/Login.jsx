@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import API from "../api/axios";
 import "./Login.css";
 
+
 const Login = () => {
   const navigate = useNavigate();
 
@@ -11,6 +12,7 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [otp, setOtp] = useState("");
   const [loading, setLoading] = useState(false);
+  
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -48,12 +50,14 @@ const Login = () => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));
 
+
       toast.success("Login successful!");
       navigate("/Job");
     } catch (err) {
       console.error(err);
       const message = err.response?.data?.message || "Invalid OTP";
       toast.error(message);
+
     } finally {
       setLoading(false);
     }
