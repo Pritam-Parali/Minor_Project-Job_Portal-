@@ -100,6 +100,7 @@ const Register = () => {
 
         {step === "form" && (
           <form onSubmit={handleRegister}>
+
             <div className="input-group">
               <select
                 name="userType"
@@ -116,7 +117,7 @@ const Register = () => {
               <input
                 type="text"
                 name="username"
-                placeholder="Username"
+                placeholder="👤 Username"
                 value={formData.username}
                 onChange={handleChange}
                 required
@@ -127,7 +128,7 @@ const Register = () => {
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder="📧 Email"
                 value={formData.email}
                 onChange={handleChange}
                 required
@@ -138,7 +139,7 @@ const Register = () => {
               <input
                 type="text"
                 name="phone"
-                placeholder="Phone Number"
+                placeholder="📞 Phone Number"
                 value={formData.phone}
                 onChange={handleChange}
                 required
@@ -149,7 +150,7 @@ const Register = () => {
               <input
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="🔒 Password"
                 value={formData.password}
                 onChange={handleChange}
                 required
@@ -160,7 +161,7 @@ const Register = () => {
               <input
                 type="password"
                 name="confirmPassword"
-                placeholder="Confirm Password"
+                placeholder="🔒 Confirm Password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
@@ -178,7 +179,7 @@ const Register = () => {
             <div className="input-group">
               <input
                 type="text"
-                placeholder="Enter OTP"
+                placeholder="🔑 Enter OTP"
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
                 required
@@ -190,6 +191,16 @@ const Register = () => {
             </button>
           </form>
         )}
+
+        <p style={{ marginTop: "16px", textAlign: "center" }}>
+          Already have an account?{" "}
+          <a
+            href="/Login"
+            style={{ color: "#2563eb", fontWeight: "600", textDecoration: "none" }}
+          >
+            Login
+          </a>
+        </p>
       </div>
     </div>
   );
