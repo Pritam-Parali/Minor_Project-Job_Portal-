@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "./Register.css";
-import Navbar from "./Navbar"; // ✅ kept from sayan branch
+import { toast } from "react-toastify";
 
 const Register = () => {
+  const [step, setStep] = useState("form"); // form | otp
+  const [loading, setLoading] = useState(false);
+
   const [formData, setFormData] = useState({
     userType: "User",
     username: "",
@@ -12,29 +15,26 @@ const Register = () => {
     confirmPassword: "",
   });
 
-  const [loading, setLoading] = useState(false);
+  const [otp, setOtp] = useState("");
 
-  // handle input change
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
-  // handle submit
-  const handleSubmit = async (e) => {
+  // STEP 1 → Register & send OTP
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match!");
+      toast.error("Passwords do not match");
       return;
     }
 
     setLoading(true);
+
     try {
-      const response = await fetch("http://localhost:5000/api/users/register", {
+      const res = await fetch("http://localhost:5000/api/users/register", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           userType: formData.userType,
           username: formData.username,
@@ -44,49 +44,63 @@ const Register = () => {
         }),
       });
 
-      const result = await response.json();
+      const data = await res.json();
 
-      if (!response.ok) {
-        alert(result.message || "⚠️ Registration failed");
+      if (!res.ok) {
+        toast.error(data.message || "Registration failed");
       } else {
-        alert(`✅ ${result.message || "Registration successful!"}`);
-        console.log("Server response:", result);
-
-        // Clear form
-        setFormData({
-          userType: "User",
-          username: "",
-          email: "",
-          phone: "",
-          password: "",
-          confirmPassword: "",
-        });
-
-        // Redirect if admin
-        if (formData.userType === "Admin") {
-          window.location.href = "/admin-dashboard";
-        } else {
-          window.location.href = "/login";
-        }
+        toast.success("OTP sent to your email 📧");
+        setStep("otp");
       }
-    } catch (error) {
-      console.error("Error during registration:", error);
-      alert("❌ Server error. Please try again later.");
+    } catch (err) {
+      console.error(err);
+      toast.error("Something went wrong. Try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // STEP 2 → Verify OTP
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await fetch(
+        "http://localhost:5000/api/users/verify-register-otp",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: formData.email, otp }),
+        }
+      );
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || "OTP verification failed");
+      } else {
+        toast.success("Account verified successfully 🎉");
+        setTimeout(() => {
+          window.location.href = "/Login";
+        }, 1500);
+      }
+    } catch (err) {
+      console.error(err);
+      toast.error("Error verifying OTP");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <>
-      {/* ✅ Optional Navbar */}
-      {/* <Navbar /> */}
+    <div className="register-page">
+      <div className="register-container">
+        <h2>{step === "form" ? "Create Account" : "Verify OTP"}</h2>
 
-      <div className="register-page">
-        <div className="register-container">
-          <h2>Create Account</h2>
-          <form onSubmit={handleSubmit}>
-            {/* User Type Dropdown */}
+        {step === "form" && (
+          <form onSubmit={handleRegister}>
+
             <div className="input-group">
               <select
                 name="userType"
@@ -99,83 +113,96 @@ const Register = () => {
               </select>
             </div>
 
-            {/* Username */}
             <div className="input-group">
               <input
                 type="text"
                 name="username"
-                placeholder="Username"
+                placeholder="👤 Username"
                 value={formData.username}
                 onChange={handleChange}
                 required
               />
-              <span className="icon">👤</span>
             </div>
 
-            {/* Email */}
             <div className="input-group">
               <input
                 type="email"
                 name="email"
-                placeholder="Email"
+                placeholder="📧 Email"
                 value={formData.email}
                 onChange={handleChange}
                 required
               />
-              <span className="icon">📧</span>
             </div>
 
-            {/* Phone */}
             <div className="input-group">
               <input
                 type="text"
                 name="phone"
-                placeholder="Phone Number"
+                placeholder="📞 Phone Number"
                 value={formData.phone}
                 onChange={handleChange}
                 required
               />
-              <span className="icon">📱</span>
             </div>
 
-            {/* Password */}
             <div className="input-group">
               <input
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="🔒 Password"
                 value={formData.password}
                 onChange={handleChange}
                 required
               />
-              <span className="icon">🔒</span>
             </div>
 
-            {/* Confirm Password */}
             <div className="input-group">
               <input
                 type="password"
                 name="confirmPassword"
-                placeholder="Confirm Password"
+                placeholder="🔒 Confirm Password"
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
               />
-              <span className="icon">🔒</span>
             </div>
 
-            {/* Submit */}
             <button type="submit" className="register-btn" disabled={loading}>
               {loading ? "Registering..." : "Register"}
             </button>
           </form>
+        )}
 
-          <p className="login-text">
-            Already have an account? <a href="/login">Login</a>
-          </p>
-        </div>
+        {step === "otp" && (
+          <form onSubmit={handleVerifyOtp}>
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="🔑 Enter OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                required
+              />
+            </div>
+
+            <button type="submit" className="register-btn" disabled={loading}>
+              {loading ? "Verifying..." : "Verify OTP"}
+            </button>
+          </form>
+        )}
+
+        <p style={{ marginTop: "16px", textAlign: "center" }}>
+          Already have an account?{" "}
+          <a
+            href="/Login"
+            style={{ color: "#2563eb", fontWeight: "600", textDecoration: "none" }}
+          >
+            Login
+          </a>
+        </p>
       </div>
-    </>
+    </div>
   );
 };
 

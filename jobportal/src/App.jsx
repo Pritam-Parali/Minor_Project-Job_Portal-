@@ -1,5 +1,9 @@
+// src/App.jsx
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import Navbar from "./components/Navbar";
 import HeroSection from "./components/HeroSection";
 import CompanySlider from "./components/CompanySlider";
@@ -10,13 +14,26 @@ import Contactus from "./components/Contactus";
 import Myprofile from "./components/Myprofile";
 import Login from "./components/Login";
 import Register from "./components/Register";
-import AdminDashboard from "./components/AdminDashboard"; // ✅ from HEAD
-import Form from "./components/Form.jsx"; // ✅ from sayan
+import Form from "./components/Form.jsx";
+
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
     <Router>
-      {/* Navbar always visible */}
+      {/* ToastContainer must be mounted once at app root */}
+      <ToastContainer
+        position="top-right"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+
+      {/* Navbar should always be visible */}
       <Navbar />
 
       <Routes>
@@ -33,26 +50,23 @@ function App() {
 
         {/* Other pages */}
         <Route path="/About" element={<About />} />
-        <Route path="/Job" element={<Job />} />
+
+        {/* PROTECTED: Job page requires valid JWT */}
+        <Route
+          path="/Job"
+          element={
+            <ProtectedRoute>
+              <Job />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="/apply/:jobId" element={<Apply />} />
         <Route path="/Contactus" element={<Contactus />} />
         <Route path="/Myprofile" element={<Myprofile />} />
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Form" element={<Form />} />
-
-        {/* ✅ Admin-only route */}
-        <Route
-          path="/admin-dashboard"
-          element={
-            localStorage.getItem("LoggedIn") &&
-            localStorage.getItem("userType") === "Admin" ? (
-              <AdminDashboard />
-            ) : (
-              <Navigate to="/login" />
-            )
-          }
-        />
       </Routes>
     </Router>
   );

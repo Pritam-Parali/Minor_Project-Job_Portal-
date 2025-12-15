@@ -1,88 +1,124 @@
 import React, { useState } from "react";
-import "./Login.css";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import API from "../api/axios";
+import "./Login.css";
+import Navbar from "./Navbar";
+
 
 const Login = () => {
-  const [formData, setFormData] = useState({ email: "", password: "" });
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const [step, setStep] = useState("credentials"); // credentials | otp
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [otp, setOtp] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  // STEP 1 → Send OTP to email after checking password
+  const handleSendOtp = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      const response = await fetch("http://localhost:5000/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+      const res = await API.post("/users/login", formData);
+      toast.success(res.data.message || "OTP sent to email");
+      setStep("otp");
+    } catch (err) {
+      const message = err.response?.data?.message || "Login failed";
+      toast.error(message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // STEP 2 → Verify OTP and login
+  const handleVerifyOtp = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const res = await API.post("/users/verify-login-otp", {
+        email: formData.email,
+        otp,
       });
 
-      const data = await response.json();
+      localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user", JSON.stringify(res.data.user));
 
-      if (response.ok) {
-        alert("✅ Login successful!");
-
-        // ✅ Store login state
-        localStorage.setItem("LoggedIn", "true");
-        localStorage.setItem("userEmail", formData.email);
-
-        // ✅ Redirect to Home or Admin Dashboard if needed
-        navigate("/");
-      } else {
-        alert(`❌ ${data.message}`);
-      }
-    } catch (error) {
-      console.error("Login error:", error);
-      alert("⚠️ Server error. Please try again.");
+      toast.success("Login successful!");
+      navigate("/Job");
+    } catch (err) {
+      const message = err.response?.data?.message || "Invalid OTP";
+      toast.error(message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
+    <>
+    <Navbar />
     <div className="login-page">
       <div className="login-container">
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="input-group">
-            <input
-              type="email"
-              name="email"
-              placeholder="Enter your email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            <span className="icon">📧</span>
-          </div>
+        <h2>{step === "credentials" ? "Login" : "Enter OTP"}</h2>
 
-          <div className="input-group">
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-            />
-            <span className="icon">🔒</span>
-          </div>
+        {step === "credentials" && (
+          <form onSubmit={handleSendOtp}>
+            <div className="input-group">
+              <input
+                type="email"
+                name="email"
+                placeholder="📧 Email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
 
-          <button type="submit" className="login-btn" disabled={loading}>
-            {loading ? "Logging in..." : "Login"}
-          </button>
-        </form>
+            <div className="input-group">
+              <input
+                type="password"
+                name="password"
+                placeholder="🔒 Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <button className="login-btn" type="submit" disabled={loading}>
+              {loading ? "Sending OTP..." : "Send OTP"}
+            </button>
+          </form>
+        )}
+
+        {step === "otp" && (
+          <form onSubmit={handleVerifyOtp}>
+            <div className="input-group">
+              <input
+                type="text"
+                placeholder="🔑 Enter 6-digit OTP"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                required
+              />
+            </div>
+
+            <button className="login-btn" type="submit" disabled={loading}>
+              {loading ? "Verifying..." : "Verify OTP"}
+            </button>
+          </form>
+        )}
 
         <p className="register-text">
-          Don’t have an account? <a href="/register">Register</a>
+          Don't have an account? <a href="/Register">Register</a>
         </p>
       </div>
     </div>
+    </>
   );
 };
 
