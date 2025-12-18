@@ -3,7 +3,6 @@ import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import jobnest from "../assets/jobnest.png";
 
 const Navbar = () => {
-  // ✅ read token on first render (no flicker)
   const [isLogged, setIsLogged] = useState(
     Boolean(localStorage.getItem("token"))
   );
@@ -12,7 +11,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ hide navbar on auth pages (CAPITAL routes)
   const hideNavbar =
     location.pathname === "/Login" ||
     location.pathname === "/Register";
@@ -32,7 +30,7 @@ const Navbar = () => {
   if (hideNavbar) return null;
 
   const navBtn =
-    "px-3 py-1 rounded-md text-lg font-medium text-white " +
+    "px-3 py-1 rounded-md text-lg font-medium text-white no-underline " +
     "transition-all duration-200 " +
     "hover:bg-blue-700/40 hover:scale-[1.05]";
 
@@ -45,7 +43,7 @@ const Navbar = () => {
 
           {/* LEFT */}
           <div className="flex items-center gap-6">
-            <NavLink to="/" className="flex items-center gap-2">
+            <NavLink to="/" className="flex items-center gap-2" style={{ textDecoration: "none" }}>
               <img
                 src={jobnest}
                 alt="logo"
@@ -55,23 +53,20 @@ const Navbar = () => {
 
             {/* DESKTOP MENU */}
             <nav className="hidden md:flex gap-3">
-              <NavLink to="/" className={navBtn}>Home</NavLink>
-              <NavLink to="/About" className={navBtn}>About</NavLink>
-              <NavLink to="/Job" className={navBtn}>Jobs</NavLink>
+              <NavLink to="/" className={navBtn} style={{ textDecoration: "none" }}>Home</NavLink>
+              <NavLink to="/About" className={navBtn} style={{ textDecoration: "none" }}>About</NavLink>
+              <NavLink to="/Job" className={navBtn} style={{ textDecoration: "none" }}>Jobs</NavLink>
             </nav>
           </div>
 
           {/* RIGHT (DESKTOP) */}
           <div className="flex items-center gap-4">
-
             {isLogged ? (
               <>
-                {/* Profile */}
-                <NavLink to="/Profile" className="hidden md:block">
+                <NavLink to="/Profile" className="hidden md:block" style={{ textDecoration: "none" }}>
                   <span className={navBtn}>Profile</span>
                 </NavLink>
 
-                {/* Logout */}
                 <button
                   onClick={handleLogout}
                   style={{ borderRadius: "9999px", minWidth: "110px" }}
@@ -86,7 +81,6 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              /* ✅ IMPROVED LOGIN BUTTON */
               <NavLink
                 to="/Login"
                 className="
@@ -100,6 +94,7 @@ const Navbar = () => {
                   transition-all duration-200
                   hover:bg-blue-50 hover:scale-[1.05]
                 "
+                style={{ textDecoration: "none" }}
               >
                 Login
               </NavLink>
@@ -118,10 +113,9 @@ const Navbar = () => {
         {/* ================= MOBILE DROPDOWN ================= */}
         {menuOpen && (
           <div className="md:hidden mt-2 rounded-xl bg-blue-600/95 backdrop-blur p-4 space-y-3">
-
-            <NavLink to="/" onClick={() => setMenuOpen(false)} className={navBtn}>Home</NavLink>
-            <NavLink to="/About" onClick={() => setMenuOpen(false)} className={navBtn}>About</NavLink>
-            <NavLink to="/Job" onClick={() => setMenuOpen(false)} className={navBtn}>Jobs</NavLink>
+            <NavLink to="/" onClick={() => setMenuOpen(false)} className={navBtn} style={{ textDecoration: "none" }}>Home</NavLink>
+            <NavLink to="/About" onClick={() => setMenuOpen(false)} className={navBtn} style={{ textDecoration: "none" }}>About</NavLink>
+            <NavLink to="/Job" onClick={() => setMenuOpen(false)} className={navBtn} style={{ textDecoration: "none" }}>Jobs</NavLink>
 
             {isLogged ? (
               <>
@@ -129,6 +123,7 @@ const Navbar = () => {
                   to="/Profile"
                   onClick={() => setMenuOpen(false)}
                   className={navBtn}
+                  style={{ textDecoration: "none" }}
                 >
                   Profile
                 </NavLink>
@@ -159,13 +154,13 @@ const Navbar = () => {
                   shadow-md
                   hover:bg-blue-50 transition
                 "
+                style={{ textDecoration: "none" }}
               >
                 Login
               </NavLink>
             )}
           </div>
         )}
-
       </div>
     </header>
   );
