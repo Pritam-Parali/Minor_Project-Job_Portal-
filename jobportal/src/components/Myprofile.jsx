@@ -1,5 +1,7 @@
 import React from 'react';
 import Navbar from './Navbar';
+import { NavLink } from 'react-router-dom';
+import 'Myprofile.css';
 
 const Myprofile = () => {
   return (
@@ -13,4 +15,4 @@ const Myprofile = () => {
   )
 }
 
-export default Myprofile
+export default Myprofile;

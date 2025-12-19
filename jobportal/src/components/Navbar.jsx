@@ -63,7 +63,7 @@ const Navbar = () => {
           <div className="flex items-center gap-4">
             {isLogged ? (
               <>
-                <NavLink to="/Profile" className="hidden md:block" style={{ textDecoration: "none" }}>
+                <NavLink to="/Myprofile" className="hidden md:block" style={{ textDecoration: "none" }}>
                   <span className={navBtn}>Profile</span>
                 </NavLink>
 
@@ -120,7 +120,7 @@ const Navbar = () => {
             {isLogged ? (
               <>
                 <NavLink
-                  to="/Profile"
+                  to="/Myprofile"
                   onClick={() => setMenuOpen(false)}
                   className={navBtn}
                   style={{ textDecoration: "none" }}
