@@ -7,7 +7,6 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
 
   const [formData, setFormData] = useState({
-    userType: "User",
     username: "",
     email: "",
     phone: "",
@@ -36,7 +35,6 @@ const Register = () => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          userType: formData.userType,
           username: formData.username,
           email: formData.email,
           phone: formData.phone,
@@ -109,7 +107,7 @@ const Register = () => {
                 required
               >
                 <option value="User">👤 User</option>
-                <option value="Admin">👑 Admin</option>
+                
               </select>
             </div>
 
@@ -192,7 +190,7 @@ const Register = () => {
           </form>
         )}
 
-        <p style={{ marginTop: "16px", textAlign: "center" }}>
+        <p style={{ marginTop: "16px", textAlign: "center", color: "black" }}>
           Already have an account?{" "}
           <a
             href="/Login"

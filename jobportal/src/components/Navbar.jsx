@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useNavigate, useLocation } from "react-router-dom";
 import jobnest from "../assets/jobnest.png";
+import "./Navbar.css";
 
 const Navbar = () => {
-  // ✅ read token on first render (no flicker)
   const [isLogged, setIsLogged] = useState(
     Boolean(localStorage.getItem("token"))
   );
@@ -12,7 +12,10 @@ const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ hide navbar on auth pages (CAPITAL routes)
+  const user = JSON.parse(localStorage.getItem("user"));
+  const isAdmin = user?.userType === "Admin";
+
+  // hide navbar on login/register
   const hideNavbar =
     location.pathname === "/Login" ||
     location.pathname === "/Register";
@@ -33,12 +36,11 @@ const Navbar = () => {
 
   const navBtn =
     "px-3 py-1 rounded-md text-lg font-medium text-white no-underline hover:no-underline " +
-    "transition-all duration-200 " +
-    "hover:bg-blue-700/40 hover:scale-[1.05]";
+    "transition-all duration-200 hover:bg-blue-700/40 hover:scale-[1.05]";
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-gradient-to-r from-sky-400 to-blue-600 shadow-sm">
-      <div className="max-w-[1400px] mx-auto px-10">
+      <div className="max-w-[1400px] mx-auto px-6">
 
         {/* ================= TOP BAR ================= */}
         <div className="h-[52px] flex items-center justify-between">
@@ -61,51 +63,53 @@ const Navbar = () => {
             </nav>
           </div>
 
-          {/* RIGHT (DESKTOP) */}
+          {/* RIGHT SIDE */}
           <div className="flex items-center gap-4">
 
-            {isLogged ? (
-              <>
-                {/* Profile */}
-                <NavLink to="/Profile" className="hidden md:block">
-                  <span className={navBtn}>Profile</span>
-                </NavLink>
+            {/* DESKTOP ONLY */}
+            <div className="hidden md:flex items-center gap-4">
+              {isLogged ? (
+                <>
+                  {isAdmin && (
+                    <NavLink to="/admin/dashboard" className={navBtn}>
+                      Admin
+                    </NavLink>
+                  )}
 
-                {/* Logout */}
-                <button
-                  onClick={handleLogout}
-                  style={{ borderRadius: "9999px", minWidth: "110px" }}
+                  <NavLink to="/Profile" className={navBtn}>
+                    Profile
+                  </NavLink>
+
+                  <button
+                    onClick={handleLogout}
+                    className="logout-btn"
+                    style={{
+                      borderRadius: "9999px",
+                      minWidth: "10px",
+                      height: "32px",
+                      padding: "0 16px",
+                    }}
+                  >
+                    Log out
+                  </button>
+                </>
+              ) : (
+                <NavLink
+                  to="/Login"
                   className="
-                    hidden md:inline-flex items-center justify-center
-                    h-[32px]
-                    bg-red-500 text-white text-base
-                    transition hover:bg-red-600 hover:scale-[1.05]
+                    inline-flex items-center justify-center
+                    h-[32px] min-w-[110px]
+                    px-6 rounded-full
+                    bg-white text-blue-700 text-base font-semibold
+                    shadow-md transition hover:bg-blue-50 hover:scale-[1.05]
                   "
                 >
-                  Log out
-                </button>
-              </>
-            ) : (
-              /* ✅ IMPROVED LOGIN BUTTON */
-              <NavLink
-                to="/Login"
-                className="
-                  hidden md:inline-flex items-center justify-center
-                  h-[32px] min-w-[110px]
-                  px-6
-                  rounded-full
-                  bg-white
-                  text-blue-700 text-base font-semibold
-                  shadow-md
-                  transition-all duration-200
-                  hover:bg-blue-50 hover:scale-[1.05]
-                "
-              >
-                Login
-              </NavLink>
-            )}
+                  Login
+                </NavLink>
+              )}
+            </div>
 
-            {/* MOBILE MENU ICON */}
+            {/* MOBILE ☰ */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="md:hidden text-white text-2xl"
@@ -117,11 +121,17 @@ const Navbar = () => {
 
         {/* ================= MOBILE DROPDOWN ================= */}
         {menuOpen && (
-          <div className="md:hidden mt-2 rounded-None bg-gradient-to-r from-skyblue-900 via-blue-800 to-skyblue-900 backdrop-blur p-2 space-y-4 flex justify-center gap-4">
+          <div className="md:hidden mt-2 rounded-none bg-gradient-to-r from-blue-800 to-blue-900 backdrop-blur p-3 space-y-4 flex flex-col items-center">
 
-            <NavLink to="/" onClick={() => setMenuOpen(false)} className={navBtn}>Home</NavLink>
-            <NavLink to="/About" onClick={() => setMenuOpen(false)} className={navBtn}>About</NavLink>
-            <NavLink to="/Job" onClick={() => setMenuOpen(false)} className={navBtn}>Jobs</NavLink>
+            <NavLink to="/" onClick={() => setMenuOpen(false)} className={navBtn}>
+              Home
+            </NavLink>
+            <NavLink to="/About" onClick={() => setMenuOpen(false)} className={navBtn}>
+              About
+            </NavLink>
+            <NavLink to="/Job" onClick={() => setMenuOpen(false)} className={navBtn}>
+              Jobs
+            </NavLink>
 
             {isLogged ? (
               <>
@@ -135,13 +145,8 @@ const Navbar = () => {
 
                 <button
                   onClick={handleLogout}
-                  style={{ borderRadius: "9999px", minWidth: "110px" }}
-                  className="
-                    inline-flex items-center justify-center
-                    h-[34px]
-                    bg-red-500 text-white text-base
-                    hover:bg-red-600 transition
-                  "
+                  className="logout-btn"
+                  style={{ minWidth: "110px" }}
                 >
                   Log out
                 </button>
@@ -153,11 +158,9 @@ const Navbar = () => {
                 className="
                   inline-flex items-center justify-center
                   h-[34px] min-w-[110px]
-                  px-6
-                  rounded-full
-                  bg-white text-blue-700 text-base font-semibold
-                  shadow-md
-                  hover:bg-blue-50 transition
+                  px-6 rounded-full
+                  bg-white text-blue-700 font-semibold
+                  shadow-md hover:bg-blue-50 transition
                 "
               >
                 Login

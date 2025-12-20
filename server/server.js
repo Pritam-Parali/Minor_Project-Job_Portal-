@@ -5,9 +5,12 @@ import dotenv from "dotenv";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
+
 import connectDB from "./config/db.js";
 import registerRoutes from "./routes/registerRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
+import jobRoutes from "./routes/jobRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 // ✅ Load environment variables
 dotenv.config();
@@ -27,15 +30,16 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ✅ Fix for __dirname in ES modules
+// ✅ Fix __dirname (ES modules)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// ✅ Routes
+// ================= ROUTES =================
 app.use("/api/users", registerRoutes);
 app.use("/api/users", loginRoutes);
-
-// ✅ Multer setup for CV uploads
+app.use("/api/jobs", jobRoutes); // ✅ MOVED HERE
+app.use("/api/admin", adminRoutes);
+// ================= CV UPLOAD (SEPARATE FEATURE) =================
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "uploads/");
@@ -44,22 +48,23 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + "-" + file.originalname);
   },
 });
+
 const upload = multer({ storage });
 
-// ✅ Job application upload route
 app.post("/api/apply", upload.single("cv"), (req, res) => {
   console.log("Form fields:", req.body);
   console.log("Uploaded file:", req.file);
+
   res.json({ message: "📄 Application received successfully!" });
 });
 
-// ✅ Serve uploaded files
+// ================= STATIC FILES =================
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// ✅ Test route
+// ================= TEST ROUTE =================
 app.get("/", (req, res) => res.send("✅ API is running"));
 
-// ✅ Start server
+// ================= START SERVER =================
 app.listen(PORT, () =>
   console.log(`🚀 Server running on http://localhost:${PORT}`)
 );

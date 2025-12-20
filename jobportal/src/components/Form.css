@@ -1,24 +1,123 @@
-.heading{
-    margin-top: 10px;
+/* Heading */
+.heading {
+    margin-top: 20px;
     text-align: center;
-    font-size: 30px;
+    font-size: 32px;
     font-weight: bolder;
-    text-decoration: solid underline blue;
+    color: #2c3e50;
+    text-decoration: underline solid #007bff;
+    letter-spacing: 1px;
 }
 
-
-.form-page{
-    padding-top: 10px;
-    padding-left: 10px;
-    background-color: rgb(167, 167, 187);
-    padding-right: 10px;
-    padding-bottom: 10px;
+/* Form container */
+.form-page {
+    margin: 20px auto;
+    max-width: 900px;
+    background: linear-gradient(135deg, #f0f4f8, #d8f3ff);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
 }
 
-.basic-details{
+/* Section titles */
+.basic-details {
     text-align: left;
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
-    margin-left: 10px;
-    text-decoration: solid underline blue;
+    margin: 15px 0;
+    color: #34495e;
+    text-decoration: underline solid #007bff;
 }
+
+/* Form labels */
+.form-label {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* Input fields */
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+/* Select dropdown */
+.form-select {
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 6px rgba(0, 123, 255, 0.5);
+}
+
+/* Buttons */
+button, .btn {
+    background: #007bff;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+button:hover, .btn:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Checkbox */
+.form-check-label {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+/* Feedback messages */
+.form-control-feedback,
+.invalid-feedback {
+    font-size: 14px;
+    color: #e74c3c;
+}
+
+/* Row spacing */
+.mb-3 {
+    margin-bottom: 20px !important;
+}
+
+/* Add animation keyframes */
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply animation to form container */
+.form-page {
+    margin: 20px auto;
+    max-width: 900px;
+    background: linear-gradient(135deg, #f0f4f8, #dfe6e9);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+
+    /* Animation */
+    opacity: 0; /* start hidden */
+    animation: fadeInUp 0.4s ease forwards;
+    animation-delay: 0.3s; /* delay in milliseconds */
+}
+

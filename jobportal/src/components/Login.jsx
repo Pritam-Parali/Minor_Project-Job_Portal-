@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import API from "../api/axios";
 import "./Login.css";
+import Navbar from "./Navbar";
+
 
 const Login = () => {
   const navigate = useNavigate();
@@ -57,6 +59,8 @@ const Login = () => {
   };
 
   return (
+    <>
+    <Navbar />
     <div className="login-page">
       <div className="login-container">
         <h2>{step === "credentials" ? "Login" : "Enter OTP"}</h2>
@@ -114,6 +118,7 @@ const Login = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 
