@@ -26,13 +26,13 @@ const Navbar = () => {
     localStorage.removeItem("user");
     setIsLogged(false);
     setMenuOpen(false);
-    navigate("/Login");
+    navigate("/");
   };
 
   if (hideNavbar) return null;
 
   const navBtn =
-    "px-3 py-1 rounded-md text-lg font-medium text-white " +
+    "px-3 py-1 rounded-md text-lg font-medium text-white no-underline hover:no-underline " +
     "transition-all duration-200 " +
     "hover:bg-blue-700/40 hover:scale-[1.05]";
 
@@ -117,7 +117,7 @@ const Navbar = () => {
 
         {/* ================= MOBILE DROPDOWN ================= */}
         {menuOpen && (
-          <div className="md:hidden mt-2 rounded-xl bg-blue-600/95 backdrop-blur p-4 space-y-3">
+          <div className="md:hidden mt-2 rounded-None bg-gradient-to-r from-skyblue-900 via-blue-800 to-skyblue-900 backdrop-blur p-2 space-y-4 flex justify-center gap-4">
 
             <NavLink to="/" onClick={() => setMenuOpen(false)} className={navBtn}>Home</NavLink>
             <NavLink to="/About" onClick={() => setMenuOpen(false)} className={navBtn}>About</NavLink>
