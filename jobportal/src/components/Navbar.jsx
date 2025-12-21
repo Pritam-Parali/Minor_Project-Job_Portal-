@@ -51,6 +51,7 @@ const Navbar = () => {
               <NavLink to="/" className={navBtn}>Home</NavLink>
               <NavLink to="/About" className={navBtn}>About</NavLink>
               <NavLink to="/Job" className={navBtn}>Jobs</NavLink>
+              <NavLink to="/Contactus" className={navBtn}>ContactUs</NavLink>
             </nav>
           </div>
 
@@ -100,6 +101,14 @@ const Navbar = () => {
             <NavLink to="/Job" onClick={() => setMenuOpen(false)} className={navBtn}>
               Jobs
             </NavLink>
+            <NavLink
+              to="/Contactus"
+              onClick={() => setMenuOpen(false)}
+              className={navBtn}
+            >
+              ContactUs
+            </NavLink>
+
 
             {isLogged ? (
               <>
