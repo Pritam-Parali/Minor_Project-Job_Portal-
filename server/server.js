@@ -5,11 +5,12 @@ import dotenv from "dotenv";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import profileRoutes from "./routes/profileRoutes.js";
 import connectDB from "./config/db.js";
 import registerRoutes from "./routes/registerRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
 
 // ✅ Load environment variables
 dotenv.config();
@@ -37,6 +38,8 @@ const __dirname = path.dirname(__filename);
 app.use("/api/users", registerRoutes);
 app.use("/api/users", loginRoutes);
 app.use("/api/jobs", jobRoutes); // ✅ MOVED HERE
+app.use("/api/admin", adminRoutes);
+app.use("/api/profile", profileRoutes);
 
 // ================= CV UPLOAD (SEPARATE FEATURE) =================
 const storage = multer.diskStorage({

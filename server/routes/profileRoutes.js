@@ -1,20 +1,26 @@
 import express from "express";
-import { getUserProfile, updateEmail, uploadProfilePic } from "../controllers/profileController.js";
-import { verifyToken } from "../middleware/authMiddleware.js";
-import multer from "multer";
+import authMiddleware from "../middleware/authMiddleware.js";
+import Register from "../models/register.js";
 
 const router = express.Router();
 
-// ✅ Profile picture upload setup
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, "uploads/"),
-  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
-});
-const upload = multer({ storage });
+// GET logged-in user's profile
+router.get("/me", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id || req.user._id;
 
-// ✅ Routes
-router.get("/me", verifyToken, getUserProfile);
-router.put("/update-email", verifyToken, updateEmail);
-router.post("/upload-profile-pic", verifyToken, upload.single("profilePic"), uploadProfilePic);
+    const user = await Register.findById(userId)
+      .select("-password -otp -otpExpires");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (err) {
+    console.error("Profile error:", err);
+    res.status(500).json({ message: "Server error" });
+  }
+});
 
 export default router;

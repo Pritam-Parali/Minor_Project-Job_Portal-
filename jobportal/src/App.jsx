@@ -15,7 +15,8 @@ import Myprofile from "./components/Myprofile";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Form from "./components/Form.jsx";
-
+import AdminDashboard from "./admin/AdminDashboard";
+import AdminRoute from "./components/AdminRoute";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -58,6 +59,14 @@ function App() {
             <ProtectedRoute>
               <Job />
             </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/admin/dashboard"
+          element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
           }
         />
 
