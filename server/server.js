@@ -11,6 +11,7 @@ import registerRoutes from "./routes/registerRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
 import jobRoutes from "./routes/jobRoutes.js";
 import adminRoutes from "./routes/adminRoutes.js";
+import applicationRoutes from "./routes/applicationRoutes.js";
 
 // ✅ Load environment variables
 dotenv.config();
@@ -39,6 +40,8 @@ app.use("/api/users", registerRoutes);
 app.use("/api/users", loginRoutes);
 app.use("/api/jobs", jobRoutes); // ✅ MOVED HERE
 app.use("/api/admin", adminRoutes);
+app.use("/api/applications", applicationRoutes);
+app.use("/uploads", express.static("uploads"));
 // ================= CV UPLOAD (SEPARATE FEATURE) =================
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -51,12 +54,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.post("/api/apply", upload.single("cv"), (req, res) => {
-  console.log("Form fields:", req.body);
-  console.log("Uploaded file:", req.file);
-
-  res.json({ message: "📄 Application received successfully!" });
-});
 
 // ================= STATIC FILES =================
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));

@@ -1,19 +1,22 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "./Apply.css";
+import { toast } from "react-toastify";
 
 function Apply() {
   const { jobId } = useParams();
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     name: "",
     address: "",
     email: "",
     phone: "",
     qualification: "",
-    jobId,
   });
 
   const [cvFile, setCvFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -27,7 +30,7 @@ function Apply() {
     e.preventDefault();
 
     if (!cvFile) {
-      alert("Please upload your CV before submitting.");
+      toast.error("Please upload your CV before submitting");
       return;
     }
 
@@ -37,12 +40,47 @@ function Apply() {
     });
     data.append("cv", cvFile);
 
-    await fetch("http://localhost:5000/apply", {
-      method: "POST",
-      body: data,
-    });
+    const token = localStorage.getItem("token");
 
-    alert("Application Sent!");
+    if (!token) {
+      toast.error("Please login to apply for a job");
+      return;
+    }
+
+    try {
+      setLoading(true);
+
+      const res = await fetch(
+        `http://localhost:5000/api/applications/apply/${jobId}`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+          body: data,
+        }
+      );
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        toast.error(result.message || "Application failed");
+        setLoading(false);
+        return;
+      }
+
+      toast.success("✅ Application submitted successfully");
+
+      // optional redirect
+      setTimeout(() => {
+        navigate("/job");
+      }, 1500);
+
+    } catch (error) {
+      toast.error("❌ Server error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -58,6 +96,7 @@ function Apply() {
           onChange={handleChange}
           required
         />
+
         <input
           type="text"
           name="address"
@@ -65,6 +104,7 @@ function Apply() {
           onChange={handleChange}
           required
         />
+
         <input
           type="email"
           name="email"
@@ -72,6 +112,7 @@ function Apply() {
           onChange={handleChange}
           required
         />
+
         <input
           type="text"
           name="phone"
@@ -90,7 +131,6 @@ function Apply() {
           <option value="Other">Other</option>
         </select>
 
-        {/* Upload CV */}
         <input
           type="file"
           accept=".pdf"
@@ -98,7 +138,9 @@ function Apply() {
           required
         />
 
-        <button type="submit">Send</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Submitting..." : "Send"}
+        </button>
       </form>
     </div>
   );
