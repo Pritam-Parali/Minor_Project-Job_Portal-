@@ -18,6 +18,8 @@ import Form from "./components/Form.jsx";
 import AdminDashboard from "./admin/AdminDashboard";
 import AdminRoute from "./components/AdminRoute";
 import ProtectedRoute from "./components/ProtectedRoute";
+import MyJobApplicants from "./components/MyJobApplicants";
+
 
 function App() {
   return (
@@ -76,6 +78,8 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Register" element={<Register />} />
         <Route path="/Form" element={<Form />} />
+        <Route path="/my-job-applicants" element={<MyJobApplicants />} />
+
       </Routes>
     </Router>
   );

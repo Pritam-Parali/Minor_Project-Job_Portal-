@@ -1,5 +1,5 @@
 import express from "express";
-import { applyJob } from "../controllers/applicationController.js";
+import { applyJob, getMyApplications, getApplicantsByJob} from "../controllers/applicationController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 import upload from "../middleware/upload.js";
 
@@ -11,5 +11,16 @@ router.post(
     upload.single("cv"),
     applyJob
 );
+router.get(
+    "/my",
+    authMiddleware,
+    getMyApplications
+);
+router.get(
+    "/job/:jobId",
+    authMiddleware,
+    getApplicantsByJob
+);
+
 
 export default router;

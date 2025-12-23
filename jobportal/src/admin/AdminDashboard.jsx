@@ -32,15 +32,17 @@ const AdminDashboard = () => {
     }, [token]);
 
     return (
-        <div className="p-4 md:p-8">
+        <div className="p-4 md:p-8 space-y-12 pb-16">
             <h1 className="text-2xl font-bold mb-6">Admin Dashboard 👑</h1>
 
             <AdminCards stats={stats} />
 
-            <AdminCharts
-                jobsPerWeek={jobsPerWeek}
-                jobsByType={jobsByType}
-            />
+            <div className="mt-20">
+                <AdminCharts
+                    jobsPerWeek={jobsPerWeek}
+                    jobsByType={jobsByType}
+                />
+            </div>
         </div>
     );
 };

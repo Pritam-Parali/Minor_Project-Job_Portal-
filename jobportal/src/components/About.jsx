@@ -157,7 +157,7 @@ const About = () => {
 
       <section className="section5">
         <div className="outerdiv5">
-          <h2>Special thanks to our Mentor</h2>
+          <h2>Special thanks to our Sir</h2>
           <div className="innerdiv5">
             <img src={ali} alt="ALI SIR"></img>
             <h3>Ashraf Ali </h3>

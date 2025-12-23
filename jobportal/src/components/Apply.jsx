@@ -69,7 +69,7 @@ function Apply() {
         return;
       }
 
-      toast.success("✅ Application submitted successfully");
+      toast.success("Application submitted");
 
       // optional redirect
       setTimeout(() => {
@@ -77,7 +77,7 @@ function Apply() {
       }, 1500);
 
     } catch (error) {
-      toast.error("❌ Server error. Please try again.");
+      toast.error("Server error. try again.");
     } finally {
       setLoading(false);
     }

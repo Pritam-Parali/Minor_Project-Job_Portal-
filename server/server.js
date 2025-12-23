@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 import multer from "multer";
 import path from "path";
 import { fileURLToPath } from "url";
-
+import profileRoutes from "./routes/profileRoutes.js";
 import connectDB from "./config/db.js";
 import registerRoutes from "./routes/registerRoutes.js";
 import loginRoutes from "./routes/loginRoutes.js";
@@ -42,6 +42,7 @@ app.use("/api/jobs", jobRoutes); // ✅ MOVED HERE
 app.use("/api/admin", adminRoutes);
 app.use("/api/applications", applicationRoutes);
 app.use("/uploads", express.static("uploads"));
+app.use("/api/profile", profileRoutes);
 // ================= CV UPLOAD (SEPARATE FEATURE) =================
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
